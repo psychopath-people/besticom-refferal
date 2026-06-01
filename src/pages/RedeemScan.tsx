@@ -93,6 +93,8 @@ export default function RedeemScan() {
     stopCamera();
     try {
       const data = JSON.parse(raw) as RedeemPayload;
+      data.phone = String(data.phone);
+      data.points = Number(data.points);
       if (data.type !== "besti_redeem") {
         setStage({ id: "error", message: "QR ini bukan QR redeem poin BESTI.\nGunakan QR dari halaman poin website." });
         return;
@@ -168,7 +170,7 @@ export default function RedeemScan() {
     startCamera();
   }
 
-  const formatPhone = (p: string) => p.replace(/^62/, "0").replace(/(\d{4})(\d{4})(\d+)/, "$1-$2-$3");
+  const formatPhone = (p: string) => String(p).replace(/^62/, "0").replace(/(\d{4})(\d{4})(\d+)/, "$1-$2-$3");
 
   return (
     <div className="fixed inset-0 bg-black text-white flex flex-col overflow-hidden">
