@@ -26,6 +26,7 @@ import {
   ShieldCheck,
   PackageOpen,
   Ticket,
+  RefreshCw,
 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { z } from "zod";
@@ -165,6 +166,39 @@ export default function Points() {
   const [selectedReward, setSelectedReward] = useState<RewardItem | null>(null);
   const [activeCategory, setActiveCategory] = useState<RewardItem["category"] | "semua">("semua");
   const [redeemOpen, setRedeemOpen] = useState(false);
+  const [checkingStatus, setCheckingStatus] = useState(false);
+  const [statusMsg, setStatusMsg] = useState<{ type: "pending" | "error" } | null>(null);
+
+  async function checkRedeemStatus() {
+    if (!data || !selectedReward) return;
+    setCheckingStatus(true);
+    setStatusMsg(null);
+    try {
+      const res = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone: data.phone, last_four: lastFour, action: "check_points" }),
+      });
+      const json = await res.json();
+      if (json.success && json.points < data.points) {
+        // Poin sudah berkurang → redeem berhasil
+        setRedeemOpen(false);
+        setRedeemNotif({
+          reward: selectedReward.name,
+          balance: String(json.points),
+          nama: json.name ?? "",
+        });
+        setData((prev) => prev ? { ...prev, points: json.points } : prev);
+        setSelectedReward(null);
+      } else {
+        setStatusMsg({ type: "pending" });
+      }
+    } catch {
+      setStatusMsg({ type: "error" });
+    } finally {
+      setCheckingStatus(false);
+    }
+  }
 
   async function handleCheck(e: React.FormEvent) {
     e.preventDefault();
@@ -503,7 +537,7 @@ export default function Points() {
                       )}
 
                       {/* Tombol generate QR */}
-                      <Dialog open={redeemOpen} onOpenChange={setRedeemOpen}>
+                      <Dialog open={redeemOpen} onOpenChange={(open) => { setRedeemOpen(open); if (!open) setStatusMsg(null); }}>
                         <DialogTrigger asChild>
                           <Button
                             variant="accent"
@@ -562,6 +596,33 @@ export default function Points() {
                                   Bot akan otomatis memproses & mengurangi poin Anda.
                                 </li>
                               </ol>
+                            </div>
+
+                            {/* Status check */}
+                            <div className="w-full space-y-2">
+                              <Button
+                                variant="outline"
+                                size="lg"
+                                className="w-full"
+                                onClick={checkRedeemStatus}
+                                disabled={checkingStatus}
+                              >
+                                {checkingStatus ? (
+                                  <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Mengecek...</>
+                                ) : (
+                                  <><RefreshCw className="mr-2 h-4 w-4" />Cek Status Redeem</>
+                                )}
+                              </Button>
+                              {statusMsg?.type === "pending" && (
+                                <p className="text-center text-sm text-muted-foreground">
+                                  Poin belum berubah. Pastikan kasir sudah scan QR, lalu cek lagi.
+                                </p>
+                              )}
+                              {statusMsg?.type === "error" && (
+                                <p className="text-center text-sm text-destructive">
+                                  Gagal mengecek. Periksa koneksi internet lalu coba lagi.
+                                </p>
+                              )}
                             </div>
 
                             {TG_BOT && (
