@@ -116,27 +116,41 @@ export default function RedeemScan() {
   async function confirmRedeem(payload: RedeemPayload) {
     setStage({ id: "confirming", payload });
     const chatId = new URLSearchParams(window.location.search).get("chat_id") ?? "";
+    const body = JSON.stringify({ ...payload, chat_id: chatId });
     try {
-      const res = await fetch(REDEEM_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...payload, chat_id: chatId }),
-      });
-      const json = await res.json();
+      let res: Response;
+      try {
+        res = await fetch(REDEEM_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body,
+        });
+      } catch (netErr) {
+        setStage({ id: "error", message: `[NET] Fetch gagal: ${String(netErr)}\nURL: ${REDEEM_URL}` });
+        return;
+      }
+      const rawText = await res.text();
+      let json: Record<string, unknown> = {};
+      try {
+        json = JSON.parse(rawText);
+      } catch {
+        setStage({ id: "error", message: `[HTTP ${res.status}] Response bukan JSON:\n${rawText.slice(0, 300)}` });
+        return;
+      }
       if (json.success) {
         setStage({
           id: "success",
-          txn_id: json.txn_id,
-          nama: json.nama ?? "",
-          reward: json.item ?? payload.reward_name,
-          balance_after: json.balance_after ?? 0,
+          txn_id: String(json.txn_id ?? ""),
+          nama: String(json.nama ?? ""),
+          reward: String(json.item ?? payload.reward_name),
+          balance_after: Number(json.balance_after ?? 0),
         });
         setTimeout(() => window.Telegram?.WebApp?.close(), 3000);
       } else {
-        setStage({ id: "error", message: json.message || "Redeem gagal. Coba lagi." });
+        setStage({ id: "error", message: `[HTTP ${res.status}] ${String(json.message ?? "Redeem gagal")}\n\n${rawText.slice(0, 200)}` });
       }
-    } catch {
-      setStage({ id: "error", message: "Koneksi gagal. Periksa internet lalu coba lagi." });
+    } catch (err) {
+      setStage({ id: "error", message: `[ERR] ${String(err)}` });
     }
   }
 
