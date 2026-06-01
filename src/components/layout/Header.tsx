@@ -35,8 +35,8 @@ export function Header() {
               Plaza Marina, Surabaya
             </span>
           </div>
-          <span className="text-primary-foreground/80">
-            Senin - Sabtu: 09:00 - 18:00 WIB
+          <span className="hidden sm:block text-primary-foreground/80">
+            Senin–Jumat: 09:00–18:00 · Sabtu: 09:00–15:00
           </span>
         </div>
       </div>

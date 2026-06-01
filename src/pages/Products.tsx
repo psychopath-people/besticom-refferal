@@ -69,19 +69,46 @@ export default function Products() {
       </section>
 
       <div className="container-custom py-10">
-        <div className="flex flex-col lg:flex-row gap-4 mb-8">
-          <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder="Cari brand..."
-              className="pl-10 h-11 rounded-xl"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
+        <div className="flex flex-col gap-4 mb-8">
+          {/* Search + view toggle row */}
+          <div className="flex gap-3 items-center">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                type="search"
+                placeholder="Cari brand..."
+                className="pl-10 h-11 rounded-xl"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+            {/* View toggle — hidden on mobile (always grid) */}
+            <div className="hidden sm:flex gap-1 bg-secondary rounded-xl p-1 shrink-0">
+              <button
+                onClick={() => setViewMode("grid")}
+                className={cn(
+                  "p-2 rounded-lg transition-colors",
+                  viewMode === "grid" ? "bg-card shadow-sm text-accent" : "text-muted-foreground hover:bg-card/50"
+                )}
+                aria-label="Grid view"
+              >
+                <Grid className="h-4 w-4" />
+              </button>
+              <button
+                onClick={() => setViewMode("list")}
+                className={cn(
+                  "p-2 rounded-lg transition-colors",
+                  viewMode === "list" ? "bg-card shadow-sm text-accent" : "text-muted-foreground hover:bg-card/50"
+                )}
+                aria-label="List view"
+              >
+                <List className="h-4 w-4" />
+              </button>
+            </div>
           </div>
 
-          <div className="flex flex-wrap gap-2">
+          {/* Category filter — scrollable on mobile */}
+          <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap">
             {categories.map((category) => (
               <button
                 key={category.id}
@@ -94,7 +121,7 @@ export default function Products() {
                   setSearchParams(searchParams);
                 }}
                 className={cn(
-                  "px-4 py-2 rounded-full text-sm font-medium transition-all",
+                  "px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap shrink-0",
                   activeCategory === category.id
                     ? "bg-primary text-primary-foreground shadow-sm"
                     : "bg-secondary text-muted-foreground hover:bg-brand-sky hover:text-foreground"
@@ -104,29 +131,6 @@ export default function Products() {
               </button>
             ))}
           </div>
-
-          <div className="flex gap-1 bg-secondary rounded-xl p-1 ml-auto">
-            <button
-              onClick={() => setViewMode("grid")}
-              className={cn(
-                "p-2 rounded-lg transition-colors",
-                viewMode === "grid" ? "bg-card shadow-sm text-accent" : "text-muted-foreground hover:bg-card/50"
-              )}
-              aria-label="Grid view"
-            >
-              <Grid className="h-4 w-4" />
-            </button>
-            <button
-              onClick={() => setViewMode("list")}
-              className={cn(
-                "p-2 rounded-lg transition-colors",
-                viewMode === "list" ? "bg-card shadow-sm text-accent" : "text-muted-foreground hover:bg-card/50"
-              )}
-              aria-label="List view"
-            >
-              <List className="h-4 w-4" />
-            </button>
-          </div>
         </div>
 
         <p className="text-sm text-muted-foreground mb-6">
@@ -134,10 +138,10 @@ export default function Products() {
         </p>
 
         <div className={cn(
-          "gap-6",
+          "grid gap-4 sm:gap-6",
           viewMode === "grid"
-            ? "grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-            : "flex flex-col"
+            ? "grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+            : "grid-cols-2 sm:grid-cols-1"
         )}>
           {filteredProducts.map((product, index) => (
             <Link
@@ -145,13 +149,13 @@ export default function Products() {
               key={product.id}
               className={cn(
                 "group rounded-2xl bg-card border border-border overflow-hidden card-hover animate-fade-in",
-                viewMode === "list" && "flex"
+                viewMode === "list" && "sm:flex"
               )}
               style={{ animationDelay: `${index * 0.04}s` }}
             >
               <div className={cn(
                 "relative bg-secondary overflow-hidden",
-                viewMode === "grid" ? "aspect-[4/3]" : "w-56 shrink-0"
+                viewMode === "list" ? "sm:w-56 sm:shrink-0 aspect-[4/3] sm:aspect-auto" : "aspect-[4/3]"
               )}>
                 <img
                   src={product.image}

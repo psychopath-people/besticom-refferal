@@ -114,10 +114,10 @@ export function Footer() {
                   info@besticomputer.id
                 </a>
               </li>
-              <li className="flex items-center gap-3">
-                <Clock className="h-5 w-5 text-accent shrink-0" />
+              <li className="flex items-start gap-3">
+                <Clock className="h-5 w-5 text-accent shrink-0 mt-0.5" />
                 <span className="text-primary-foreground/70 text-sm">
-                  Senin - Sabtu: 09:00 - 18:00 WIB
+                  Senin–Jumat: 09:00–18:00 WIB<br />Sabtu: 09:00–15:00 WIB
                 </span>
               </li>
             </ul>
@@ -128,16 +128,8 @@ export function Footer() {
         <div className="mt-12 pt-8 border-t border-primary-foreground/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-primary-foreground/50 text-sm">
-              © 2024 BESTI Computer. Semua hak dilindungi.
+              © {new Date().getFullYear()} BESTI Computer. Semua hak dilindungi.
             </p>
-            <div className="flex items-center gap-6">
-              <Link to="/privacy" className="text-primary-foreground/50 hover:text-primary-foreground transition-colors text-sm">
-                Kebijakan Privasi
-              </Link>
-              <Link to="/terms" className="text-primary-foreground/50 hover:text-primary-foreground transition-colors text-sm">
-                Syarat & Ketentuan
-              </Link>
-            </div>
           </div>
         </div>
       </div>

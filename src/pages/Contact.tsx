@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,7 +28,32 @@ const contactInfo = [
   },
 ];
 
+const WA_NUMBER = "6281234567890";
+
 export default function Contact() {
+  const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", category: "", message: "" });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const categoryLabels: Record<string, string> = {
+      pengadaan: "Pengadaan IT",
+      konsultasi: "Konsultasi Produk",
+      penawaran: "Minta Penawaran",
+      lainnya: "Lainnya",
+    };
+    const lines = [
+      `Halo BESTI Computer, saya ingin menghubungi tim Anda.`,
+      ``,
+      `*Nama:* ${form.name || "-"}`,
+      form.company ? `*Instansi:* ${form.company}` : null,
+      `*Email:* ${form.email || "-"}`,
+      `*Telepon:* ${form.phone || "-"}`,
+      form.category ? `*Kebutuhan:* ${categoryLabels[form.category] || form.category}` : null,
+      form.message ? `\n*Pesan:*\n${form.message}` : null,
+    ].filter(Boolean).join("\n");
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(lines)}`, "_blank");
+  };
+
   return (
     <Layout>
       {/* Header */}
@@ -86,19 +112,28 @@ export default function Contact() {
                 <h2 className="font-heading text-2xl text-foreground mb-6">
                   Kirim Pesan
                 </h2>
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={handleSubmit}>
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-foreground mb-2">
-                        Nama Lengkap
+                        Nama Lengkap *
                       </label>
-                      <Input placeholder="Nama Anda" />
+                      <Input
+                        placeholder="Nama Anda"
+                        required
+                        value={form.name}
+                        onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
+                      />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-foreground mb-2">
                         Perusahaan / Instansi
                       </label>
-                      <Input placeholder="Nama perusahaan (opsional)" />
+                      <Input
+                        placeholder="Nama perusahaan (opsional)"
+                        value={form.company}
+                        onChange={(e) => setForm((p) => ({ ...p, company: e.target.value }))}
+                      />
                     </div>
                   </div>
                   <div className="grid sm:grid-cols-2 gap-4">
@@ -106,20 +141,35 @@ export default function Contact() {
                       <label className="block text-sm font-medium text-foreground mb-2">
                         Email
                       </label>
-                      <Input type="email" placeholder="email@contoh.com" />
+                      <Input
+                        type="email"
+                        placeholder="email@contoh.com"
+                        value={form.email}
+                        onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
+                      />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-foreground mb-2">
-                        Nomor Telepon
+                        Nomor WhatsApp *
                       </label>
-                      <Input type="tel" placeholder="+62 812-xxxx-xxxx" />
+                      <Input
+                        type="tel"
+                        placeholder="08xxxxxxxxxx"
+                        required
+                        value={form.phone}
+                        onChange={(e) => setForm((p) => ({ ...p, phone: e.target.value }))}
+                      />
                     </div>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-2">
                       Kategori Kebutuhan
                     </label>
-                    <select className="w-full h-10 px-3 rounded-lg border border-input bg-background text-sm">
+                    <select
+                      className="w-full h-10 px-3 rounded-lg border border-input bg-background text-sm"
+                      value={form.category}
+                      onChange={(e) => setForm((p) => ({ ...p, category: e.target.value }))}
+                    >
                       <option value="">Pilih kategori</option>
                       <option value="pengadaan">Pengadaan IT</option>
                       <option value="konsultasi">Konsultasi Produk</option>
@@ -131,13 +181,16 @@ export default function Contact() {
                     <label className="block text-sm font-medium text-foreground mb-2">
                       Pesan
                     </label>
-                    <Textarea 
-                      placeholder="Jelaskan kebutuhan Anda..." 
+                    <Textarea
+                      placeholder="Jelaskan kebutuhan Anda..."
                       rows={5}
+                      value={form.message}
+                      onChange={(e) => setForm((p) => ({ ...p, message: e.target.value }))}
                     />
                   </div>
-                  <Button variant="accent" size="lg" className="w-full sm:w-auto">
-                    Kirim Pesan
+                  <Button type="submit" variant="whatsapp" size="lg" className="w-full sm:w-auto">
+                    <MessageCircle className="mr-2 h-4 w-4" />
+                    Kirim via WhatsApp
                   </Button>
                 </form>
               </div>
