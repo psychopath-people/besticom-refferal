@@ -6,8 +6,10 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { Sparkles, Gift, Trophy, ShieldCheck, CheckCircle2, Loader2 } from "lucide-react";
+import { Sparkles, Gift, Trophy, ShieldCheck, CheckCircle2, Loader2, Lock } from "lucide-react";
 import { z } from "zod";
+
+const STAFF_CODE = "bestidaftar";
 
 const memberSchema = z.object({
   fullName: z.string().trim().min(2, "Nama minimal 2 karakter").max(100, "Nama maksimal 100 karakter"),
@@ -49,6 +51,8 @@ const benefits = [
 export default function Member() {
   const { toast } = useToast();
   const [submitted, setSubmitted] = useState(false);
+  const [staffCode, setStaffCode] = useState("");
+  const [staffCodeError, setStaffCodeError] = useState("");
   const [errors, setErrors] = useState<Partial<Record<keyof MemberForm, string>>>({});
   const [form, setForm] = useState<MemberForm>({
     fullName: "",
@@ -69,6 +73,13 @@ export default function Member() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (staffCode !== STAFF_CODE) {
+      setStaffCodeError("Kode akses salah. Hubungi staff BESTI untuk mendapatkan kode.");
+      return;
+    }
+    setStaffCodeError("");
+
     const result = memberSchema.safeParse(form);
     if (!result.success) {
       const fieldErrors: Partial<Record<keyof MemberForm, string>> = {};
@@ -309,6 +320,29 @@ export default function Member() {
             </div>
 
             <div className="pt-2 space-y-3">
+              {/* Kode akses staff */}
+              <div className="space-y-2 p-4 rounded-xl border border-border bg-muted/40">
+                <Label htmlFor="staffCode" className="flex items-center gap-2">
+                  <Lock className="h-3.5 w-3.5 text-muted-foreground" />
+                  Kode Akses Staff *
+                </Label>
+                <Input
+                  id="staffCode"
+                  type="password"
+                  value={staffCode}
+                  onChange={(e) => { setStaffCode(e.target.value); setStaffCodeError(""); }}
+                  placeholder="Masukkan kode akses dari staff BESTI"
+                  aria-invalid={!!staffCodeError}
+                />
+                {staffCodeError ? (
+                  <p className="text-xs text-destructive">{staffCodeError}</p>
+                ) : (
+                  <p className="text-xs text-muted-foreground">
+                    Kode ini diberikan oleh kasir/staff BESTI saat melakukan pendaftaran.
+                  </p>
+                )}
+              </div>
+
               <Button type="submit" variant="accent" size="lg" className="w-full" disabled={loading}>
                 {loading ? (
                   <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Mendaftarkan...</>

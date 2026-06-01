@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import jsQR from "jsqr";
-import { Loader2, CheckCircle2, XCircle, RefreshCw, Scan } from "lucide-react";
+import { Loader2, CheckCircle2, XCircle, RefreshCw, Scan, Lock } from "lucide-react";
 
 const REDEEM_URL = "/api/redeem";
 const QR_EXPIRY_MS = 15 * 60 * 1000;
+const ADMIN_PASSWORD = "bestiscan";
 
 type RedeemPayload = {
   type: string;
@@ -38,6 +39,8 @@ export default function RedeemScan() {
   const detectedRef = useRef(false);
 
   const [stage, setStage] = useState<Stage>({ id: "scanning" });
+  const [adminPass, setAdminPass] = useState("");
+  const [passError, setPassError] = useState(false);
 
   useEffect(() => {
     window.Telegram?.WebApp?.ready();
@@ -179,6 +182,8 @@ export default function RedeemScan() {
 
   function restart() {
     setStage({ id: "scanning" });
+    setAdminPass("");
+    setPassError(false);
     startCamera();
   }
 
@@ -246,6 +251,28 @@ export default function RedeemScan() {
                 </p>
                 <p className="text-white/60 text-sm mt-1">{formatPhone(stage.payload.phone)}</p>
               </div>
+
+              {/* Admin password verification */}
+              <div className="space-y-1.5">
+                <div className="flex items-center gap-1.5 mb-1">
+                  <Lock className="h-3.5 w-3.5 text-white/60" />
+                  <span className="text-xs text-white/60 font-medium">Password Admin</span>
+                </div>
+                <input
+                  type="password"
+                  value={adminPass}
+                  onChange={(e) => { setAdminPass(e.target.value); setPassError(false); }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && adminPass === ADMIN_PASSWORD) confirmRedeem(stage.payload);
+                  }}
+                  placeholder="Masukkan password admin..."
+                  className={`w-full px-3 py-2.5 rounded-xl bg-white/10 border text-white placeholder-white/30 text-sm outline-none focus:border-white/50 transition-colors ${passError ? "border-red-400" : "border-white/20"}`}
+                />
+                {passError && (
+                  <p className="text-xs text-red-400">Password salah. Coba lagi.</p>
+                )}
+              </div>
+
               <div className="grid grid-cols-2 gap-2">
                 <button
                   onClick={restart}
@@ -255,7 +282,10 @@ export default function RedeemScan() {
                   Scan Ulang
                 </button>
                 <button
-                  onClick={() => confirmRedeem(stage.payload)}
+                  onClick={() => {
+                    if (adminPass !== ADMIN_PASSWORD) { setPassError(true); return; }
+                    confirmRedeem(stage.payload);
+                  }}
                   className="flex items-center justify-center gap-2 py-3 rounded-xl bg-green-500 text-white text-sm font-bold active:opacity-80"
                 >
                   <CheckCircle2 className="h-4 w-4" />
