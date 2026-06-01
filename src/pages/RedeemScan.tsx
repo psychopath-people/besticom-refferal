@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import jsQR from "jsqr";
 import { Loader2, CheckCircle2, XCircle, RefreshCw, Scan } from "lucide-react";
 
@@ -29,6 +30,7 @@ declare global {
 }
 
 export default function RedeemScan() {
+  const navigate = useNavigate();
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rafRef = useRef<number>(0);
@@ -149,14 +151,24 @@ export default function RedeemScan() {
         return;
       }
       if (json.success) {
-        setStage({
-          id: "success",
+        const successData = {
+          id: "success" as const,
           txn_id: String(json.txn_id ?? ""),
           nama: String(json.nama ?? ""),
           reward: String(json.item ?? payload.reward_name),
           balance_after: Number(json.balance_after ?? 0),
+        };
+        setStage(successData);
+        const params = new URLSearchParams({
+          redeemed: "1",
+          reward: successData.reward,
+          balance: String(successData.balance_after),
+          nama: successData.nama,
         });
-        setTimeout(() => tgApp?.close(), 3000);
+        setTimeout(() => {
+          tgApp?.close();
+          navigate(`/points?${params.toString()}`);
+        }, 4000);
       } else {
         setStage({ id: "error", message: `[HTTP ${res.status}] ${String(json.message ?? "Redeem gagal")}\n\n${rawText.slice(0, 200)}` });
       }
@@ -276,6 +288,21 @@ export default function RedeemScan() {
                 <p className="text-green-200 text-sm">Sisa poin: <span className="font-bold">{stage.balance_after.toLocaleString("id-ID")}</span></p>
                 <p className="text-white/50 text-xs font-mono">{stage.txn_id}</p>
               </div>
+              <button
+                onClick={() => {
+                  const params = new URLSearchParams({
+                    redeemed: "1",
+                    reward: stage.reward,
+                    balance: String(stage.balance_after),
+                    nama: stage.nama,
+                  });
+                  navigate(`/points?${params.toString()}`);
+                }}
+                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-white/20 text-white text-sm font-semibold active:opacity-70"
+              >
+                Lihat Halaman Poin →
+              </button>
+              <p className="text-green-200/60 text-xs text-center">Otomatis diarahkan dalam beberapa detik...</p>
             </div>
           )}
 

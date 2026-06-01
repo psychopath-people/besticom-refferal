@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -142,6 +143,20 @@ function normalizePhone(input: string) {
 }
 
 export default function Points() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [redeemNotif, setRedeemNotif] = useState<{ reward: string; balance: string; nama: string } | null>(null);
+
+  useEffect(() => {
+    if (searchParams.get("redeemed") === "1") {
+      setRedeemNotif({
+        reward: searchParams.get("reward") ?? "",
+        balance: searchParams.get("balance") ?? "",
+        nama: searchParams.get("nama") ?? "",
+      });
+      setSearchParams({}, { replace: true });
+    }
+  }, []);
+
   const [phone, setPhone] = useState("");
   const [lastFour, setLastFour] = useState("");
   const [loading, setLoading] = useState(false);
@@ -246,6 +261,31 @@ export default function Points() {
 
   return (
     <Layout>
+      {redeemNotif && (
+        <div className="bg-green-600 text-white px-4 py-4">
+          <div className="container-custom flex items-start gap-3">
+            <CheckCircle2 className="h-6 w-6 shrink-0 mt-0.5" />
+            <div className="flex-1">
+              <p className="font-bold text-base">Redeem Berhasil! 🎉</p>
+              <p className="text-green-100 text-sm mt-0.5">
+                {redeemNotif.nama && <><span className="font-semibold">{redeemNotif.nama}</span> — </>}
+                <span className="font-semibold">{redeemNotif.reward}</span> berhasil ditukarkan.
+                {redeemNotif.balance && (
+                  <> Sisa poin: <span className="font-bold">{Number(redeemNotif.balance).toLocaleString("id-ID")} poin</span>.</>
+                )}
+              </p>
+            </div>
+            <button
+              onClick={() => setRedeemNotif(null)}
+              className="text-green-200 hover:text-white text-xl leading-none shrink-0"
+              aria-label="Tutup"
+            >
+              ×
+            </button>
+          </div>
+        </div>
+      )}
+
       <section className="relative surface-mesh border-b border-border">
         <div className="container-custom py-14 md:py-20">
           <div className="max-w-2xl space-y-4">
