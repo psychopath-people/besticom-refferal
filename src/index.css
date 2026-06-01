@@ -1,0 +1,290 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* BESTI Computer Design System
+   A confident, tech-forward design for Indonesian IT retail
+   Inspired by international e-commerce aesthetics
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    /* BESTI brand: blue + black + green + white + sky blue
+       Modern 2026 aesthetic — deep navy ink, electric brand blue,
+       fresh mint green accent, soft sky tints. */
+
+    --background: 210 40% 99%;
+    --foreground: 222 47% 8%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 8%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 8%;
+
+    /* Primary: deep ink black with subtle blue undertone (logo black) */
+    --primary: 222 47% 8%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary: soft sky-blue surface */
+    --secondary: 205 60% 96%;
+    --secondary-foreground: 222 47% 12%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 45%;
+
+    /* Accent: BESTI brand blue (logo blue) */
+    --accent: 215 92% 52%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Brand sky — light blue tint for highlights & soft surfaces */
+    --brand-sky: 200 95% 88%;
+    --brand-sky-foreground: 222 47% 12%;
+
+    /* Action: fresh green (logo green) — used for success / loyalty / WA */
+    --action: 152 72% 42%;
+    --action-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 215 92% 52%;
+
+    --radius: 0.875rem;
+
+    /* Brand gradients (modern 2026 — soft tech glow) */
+    --gradient-brand: linear-gradient(135deg, hsl(215 92% 52%) 0%, hsl(200 95% 60%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(222 47% 8%) 0%, hsl(220 60% 14%) 50%, hsl(215 92% 22%) 100%);
+    --gradient-soft: linear-gradient(180deg, hsl(205 60% 97%) 0%, hsl(210 40% 99%) 100%);
+    --gradient-mesh: radial-gradient(at 20% 10%, hsl(215 92% 52% / 0.18) 0px, transparent 50%),
+                     radial-gradient(at 80% 0%, hsl(200 95% 75% / 0.22) 0px, transparent 50%),
+                     radial-gradient(at 50% 100%, hsl(152 72% 60% / 0.12) 0px, transparent 50%);
+
+    /* Shadows — soft, modern, blue-tinted */
+    --shadow-card: 0 1px 2px 0 hsl(222 47% 8% / 0.04), 0 8px 24px -8px hsl(215 92% 52% / 0.08);
+    --shadow-card-hover: 0 4px 12px -2px hsl(222 47% 8% / 0.08), 0 16px 40px -12px hsl(215 92% 52% / 0.18);
+    --shadow-elevated: 0 12px 48px -8px hsl(215 92% 52% / 0.25);
+    --shadow-glow: 0 0 0 1px hsl(215 92% 52% / 0.1), 0 8px 32px -4px hsl(215 92% 52% / 0.3);
+
+    /* Sidebar defaults */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222 47% 8%;
+
+    --secondary: 217 33% 14%;
+    --secondary-foreground: 210 40% 95%;
+
+    --muted: 217 33% 14%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 215 92% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --brand-sky: 200 95% 70%;
+    --brand-sky-foreground: 222 47% 8%;
+
+    --action: 152 72% 50%;
+    --action-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 18%;
+    --input: 217 33% 18%;
+    --ring: 215 92% 60%;
+
+    --shadow-card: 0 1px 3px 0 hsl(0 0% 0% / 0.2);
+    --shadow-card-hover: 0 4px 16px 0 hsl(0 0% 0% / 0.3);
+    --shadow-elevated: 0 8px 32px 0 hsl(0 0% 0% / 0.4);
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer components {
+  /* Card hover effects */
+  .card-hover {
+    @apply transition-all duration-200 ease-out;
+    box-shadow: var(--shadow-card);
+  }
+  
+  .card-hover:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
+
+  /* Button variants */
+  .btn-accent {
+    @apply bg-accent text-accent-foreground font-semibold;
+    @apply transition-all duration-200 ease-out;
+    @apply hover:brightness-110 active:scale-[0.98];
+  }
+
+  .btn-action {
+    @apply font-semibold;
+    background: hsl(var(--action));
+    color: hsl(var(--action-foreground));
+    @apply transition-all duration-200 ease-out;
+    @apply hover:brightness-110 active:scale-[0.98];
+  }
+
+  /* Trust badge styling */
+  .trust-badge {
+    @apply px-4 py-2 rounded-lg bg-muted/50;
+    @apply text-sm font-medium text-muted-foreground;
+    @apply flex items-center gap-2;
+  }
+
+  /* Section spacing (8pt grid) */
+  .section-spacing {
+    @apply py-16 md:py-24;
+  }
+
+  /* Container with consistent padding */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Product spec table */
+  .spec-row {
+    @apply flex py-3 border-b border-border last:border-0;
+  }
+
+  .spec-label {
+    @apply w-1/3 text-muted-foreground text-sm font-medium;
+  }
+
+  .spec-value {
+    @apply w-2/3 text-foreground text-sm;
+  }
+
+  /* Gradient text — brand blue glow */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-brand);
+  }
+
+  /* Modern surfaces */
+  .surface-mesh {
+    background-image: var(--gradient-mesh);
+  }
+
+  .surface-hero {
+    background-image: var(--gradient-hero);
+  }
+
+  .glass-card {
+    @apply bg-card/70 backdrop-blur-xl border border-border/60;
+    box-shadow: var(--shadow-card);
+  }
+
+  .glow-ring {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Brand partner logos */
+  .brand-logo {
+    @apply h-8 md:h-10 object-contain grayscale opacity-60;
+    @apply transition-all duration-200;
+    @apply hover:grayscale-0 hover:opacity-100;
+  }
+}
+
+@layer utilities {
+  /* Focus states for accessibility */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
+  }
+
+  /* Smooth page transitions */
+  .page-transition {
+    @apply animate-fade-in;
+  }
+}
+
+/* Custom keyframes */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
