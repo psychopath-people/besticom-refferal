@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import jsQR from "jsqr";
 import { Loader2, CheckCircle2, XCircle, RefreshCw, Scan } from "lucide-react";
 
-const REDEEM_URL = "https://n8n.autoinovasoftsolution.cloud/webhook/besti-redeem";
+const REDEEM_URL = "/api/redeem";
 const QR_EXPIRY_MS = 15 * 60 * 1000;
 
 type RedeemPayload = {
@@ -115,11 +115,12 @@ export default function RedeemScan() {
 
   async function confirmRedeem(payload: RedeemPayload) {
     setStage({ id: "confirming", payload });
+    const chatId = new URLSearchParams(window.location.search).get("chat_id") ?? "";
     try {
       const res = await fetch(REDEEM_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ ...payload, chat_id: chatId }),
       });
       const json = await res.json();
       if (json.success) {
