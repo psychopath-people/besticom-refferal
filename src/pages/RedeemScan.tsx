@@ -116,6 +116,15 @@ export default function RedeemScan() {
   async function confirmRedeem(payload: RedeemPayload) {
     setStage({ id: "confirming", payload });
     const chatId = new URLSearchParams(window.location.search).get("chat_id") ?? "";
+
+    // Telegram Mini App path — sendData() is only available when opened via web_app keyboard button
+    const tgApp = window.Telegram?.WebApp;
+    if (tgApp?.sendData) {
+      tgApp.sendData(JSON.stringify({ ...payload, chat_id: chatId }));
+      return; // Mini App closes automatically, bot sends confirmation via Telegram
+    }
+
+    // Fallback: HTTP fetch (regular browser / testing)
     const body = JSON.stringify({ ...payload, chat_id: chatId });
     try {
       let res: Response;
@@ -145,7 +154,7 @@ export default function RedeemScan() {
           reward: String(json.item ?? payload.reward_name),
           balance_after: Number(json.balance_after ?? 0),
         });
-        setTimeout(() => window.Telegram?.WebApp?.close(), 3000);
+        setTimeout(() => tgApp?.close(), 3000);
       } else {
         setStage({ id: "error", message: `[HTTP ${res.status}] ${String(json.message ?? "Redeem gagal")}\n\n${rawText.slice(0, 200)}` });
       }
