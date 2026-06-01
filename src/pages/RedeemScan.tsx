@@ -141,8 +141,8 @@ export default function RedeemScan() {
           headers: { "Content-Type": "application/json" },
           body,
         });
-      } catch (netErr) {
-        setStage({ id: "error", message: `[NET] Fetch gagal: ${String(netErr)}\nURL: ${REDEEM_URL}` });
+      } catch {
+        setStage({ id: "error", message: "Koneksi bermasalah. Periksa jaringan internet lalu coba scan ulang." });
         return;
       }
       const rawText = await res.text();
@@ -150,7 +150,7 @@ export default function RedeemScan() {
       try {
         json = JSON.parse(rawText);
       } catch {
-        setStage({ id: "error", message: `[HTTP ${res.status}] Response bukan JSON:\n${rawText.slice(0, 300)}` });
+        setStage({ id: "error", message: "Respons dari server tidak valid. Coba scan ulang atau hubungi tim BESTI." });
         return;
       }
       if (json.success) {
@@ -173,10 +173,10 @@ export default function RedeemScan() {
           navigate(`/points?${params.toString()}`);
         }, 4000);
       } else {
-        setStage({ id: "error", message: `[HTTP ${res.status}] ${String(json.message ?? "Redeem gagal")}\n\n${rawText.slice(0, 200)}` });
+        setStage({ id: "error", message: String(json.message ?? "Penukaran gagal. Silakan coba lagi.") });
       }
-    } catch (err) {
-      setStage({ id: "error", message: `[ERR] ${String(err)}` });
+    } catch {
+      setStage({ id: "error", message: "Terjadi kesalahan. Silakan coba scan ulang." });
     }
   }
 

@@ -543,7 +543,7 @@ export default function Points() {
                         </p>
                       )}
 
-                      {/* Tombol generate QR */}
+                      {/* Tombol buka QR */}
                       <Dialog open={redeemOpen} onOpenChange={(open) => { if (!open) closeRedeemDialog(); else setRedeemOpen(true); }}>
                         <DialogTrigger asChild>
                           <Button
@@ -554,7 +554,7 @@ export default function Points() {
                           >
                             <QrCode className="mr-2 h-5 w-5" />
                             {selectedReward
-                              ? `Generate QR — ${selectedReward.name}`
+                              ? `Tukar — ${selectedReward.name}`
                               : "Pilih reward terlebih dahulu"}
                           </Button>
                         </DialogTrigger>
@@ -562,12 +562,12 @@ export default function Points() {
                         <DialogContent>
                           <DialogHeader>
                             <DialogTitle>
-                              {redeemSuccess ? "Redeem Berhasil! 🎉" : "QR Redeem Poin"}
+                              {redeemSuccess ? "Penukaran Berhasil!" : "Kode QR Penukaran Poin"}
                             </DialogTitle>
                             <DialogDescription>
                               {redeemSuccess
-                                ? "Poin kamu berhasil ditukarkan dengan reward berikut."
-                                : "Tunjukkan QR ini ke kasir BESTI atau foto & kirim ke bot Telegram untuk proses otomatis."}
+                                ? "Poin Anda berhasil ditukarkan. Berikut detail transaksinya."
+                                : "Tunjukkan kode QR ini kepada kasir BESTI untuk menukar poin Anda."}
                             </DialogDescription>
                           </DialogHeader>
 
@@ -584,52 +584,55 @@ export default function Points() {
                                 {redeemSuccess.nama && (
                                   <p className="text-muted-foreground text-sm">Halo, <span className="font-semibold">{redeemSuccess.nama}</span>!</p>
                                 )}
-                                <p className="text-sm text-muted-foreground mt-2">
-                                  Sisa poin kamu sekarang:
-                                </p>
+                                <p className="text-sm text-muted-foreground mt-2">Sisa poin Anda</p>
                                 <p className="font-heading text-4xl font-bold text-green-600">
                                   {redeemSuccess.balance.toLocaleString("id-ID")}
                                   <span className="text-base font-normal text-muted-foreground ml-1">poin</span>
                                 </p>
                               </div>
                               <Button className="w-full" onClick={closeRedeemDialog}>
-                                Tutup
+                                Selesai
                               </Button>
                             </div>
                           ) : (
                             /* ── QR SCREEN ── */
-                            <div className="flex flex-col items-center gap-6 py-4">
-                              <div className="p-5 rounded-2xl bg-card border border-border shadow-card">
+                            <div className="flex flex-col items-center gap-5 py-4">
+                              <div className="p-4 rounded-2xl bg-card border border-border shadow-card">
                                 {redeemPayload && (
                                   <QRCodeSVG
                                     value={redeemPayload}
-                                    size={240}
+                                    size={220}
                                     level="M"
                                     includeMargin={false}
                                   />
                                 )}
                               </div>
 
-                              <div className="text-center space-y-1">
-                                <p className="font-heading text-xl font-bold text-foreground">
+                              <div className="text-center space-y-0.5">
+                                <p className="font-heading text-lg font-bold text-foreground">
                                   {selectedReward?.name}
                                 </p>
                                 <p className="text-sm font-semibold text-action">
                                   {selectedReward?.points.toLocaleString("id-ID")} poin
                                 </p>
-                                <p className="text-sm text-muted-foreground">{data.phone}</p>
+                                <p className="text-xs text-muted-foreground">
+                                  {String(data.phone).replace(/^62/, "0").replace(/(\d{4})(\d{4})(\d+)/, "$1-$2-$3")}
+                                </p>
                               </div>
 
-                              <div className="w-full space-y-2 p-4 rounded-xl bg-secondary text-sm text-secondary-foreground">
-                                <p className="font-semibold flex items-center gap-2">
-                                  <CheckCircle2 className="h-4 w-4 text-action" />
-                                  Cara redeem:
-                                </p>
-                                <ol className="list-decimal list-inside space-y-1 text-muted-foreground">
-                                  <li>Tunjukkan QR langsung ke kasir BESTI, atau</li>
-                                  <li>Screenshot / foto QR di atas.</li>
-                                  <li>Kirim foto ke bot Telegram BESTI Computer.</li>
-                                  <li>Bot akan otomatis memproses & mengurangi poin Anda.</li>
+                              <div className="w-full p-4 rounded-xl bg-secondary space-y-2.5">
+                                <p className="text-xs font-semibold text-secondary-foreground uppercase tracking-wide">Langkah penukaran</p>
+                                <ol className="space-y-2">
+                                  {[
+                                    "Tunjukkan QR ini kepada kasir BESTI.",
+                                    "Kasir akan memindai QR untuk memproses penukaran.",
+                                    "Tap tombol di bawah setelah kasir selesai memindai.",
+                                  ].map((step, i) => (
+                                    <li key={i} className="flex items-start gap-2.5 text-sm text-muted-foreground">
+                                      <span className="shrink-0 w-5 h-5 rounded-full bg-action/15 text-action text-xs font-bold flex items-center justify-center mt-0.5">{i + 1}</span>
+                                      {step}
+                                    </li>
+                                  ))}
                                 </ol>
                               </div>
 
@@ -643,34 +646,33 @@ export default function Points() {
                                   disabled={checkingStatus}
                                 >
                                   {checkingStatus ? (
-                                    <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Mengecek...</>
+                                    <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Memverifikasi...</>
                                   ) : (
-                                    <><RefreshCw className="mr-2 h-4 w-4" />Cek Status Redeem</>
+                                    <><RefreshCw className="mr-2 h-4 w-4" />Kasir Sudah Scan? Cek di Sini</>
                                   )}
                                 </Button>
                                 {statusMsg?.type === "pending" && (
                                   <p className="text-center text-sm text-muted-foreground">
-                                    Poin belum berubah. Pastikan kasir sudah scan QR, lalu cek lagi.
+                                    Penukaran belum diproses. Pastikan kasir telah memindai QR Anda, lalu coba lagi.
                                   </p>
                                 )}
                                 {statusMsg?.type === "error" && (
                                   <p className="text-center text-sm text-destructive">
-                                    Gagal mengecek. Periksa koneksi internet lalu coba lagi.
+                                    Tidak dapat terhubung. Periksa koneksi internet Anda lalu coba lagi.
                                   </p>
                                 )}
                               </div>
 
                               {TG_BOT && (
-                                <Button variant="action" size="lg" className="w-full" asChild>
-                                  <a
-                                    href={`https://t.me/${TG_BOT}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                  >
-                                    <Send className="mr-2 h-4 w-4" />
-                                    Buka Bot Telegram
-                                  </a>
-                                </Button>
+                                <a
+                                  href={`https://t.me/${TG_BOT}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+                                >
+                                  <Send className="h-3 w-3" />
+                                  Atau kirim via bot Telegram BESTI
+                                </a>
                               )}
                             </div>
                           )}
