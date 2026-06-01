@@ -303,25 +303,28 @@ export default function Points() {
   return (
     <Layout>
       {redeemNotif && (
-        <div className="bg-green-600 text-white px-4 py-4">
-          <div className="container-custom flex items-start gap-3">
-            <CheckCircle2 className="h-6 w-6 shrink-0 mt-0.5" />
-            <div className="flex-1">
-              <p className="font-bold text-base">Redeem Berhasil! 🎉</p>
-              <p className="text-green-100 text-sm mt-0.5">
-                {redeemNotif.nama && <><span className="font-semibold">{redeemNotif.nama}</span> — </>}
+        <div className="bg-green-600 text-white">
+          <div className="container-custom py-3 px-4 flex items-start gap-3">
+            <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5" />
+            <div className="flex-1 min-w-0">
+              <p className="font-bold text-sm sm:text-base">Redeem Berhasil!</p>
+              <p className="text-green-100 text-xs sm:text-sm mt-0.5 break-words">
+                {redeemNotif.nama && (
+                  <span className="font-semibold">{redeemNotif.nama}</span>
+                )}
+                {redeemNotif.nama && " — "}
                 <span className="font-semibold">{redeemNotif.reward}</span> berhasil ditukarkan.
                 {redeemNotif.balance && (
-                  <> Sisa poin: <span className="font-bold">{Number(redeemNotif.balance).toLocaleString("id-ID")} poin</span>.</>
+                  <> Sisa: <span className="font-bold">{Number(redeemNotif.balance).toLocaleString("id-ID")} poin</span>.</>
                 )}
               </p>
             </div>
             <button
               onClick={() => setRedeemNotif(null)}
-              className="text-green-200 hover:text-white text-xl leading-none shrink-0"
+              className="text-green-200 hover:text-white leading-none shrink-0 p-1 -mr-1"
               aria-label="Tutup"
             >
-              ×
+              <span className="text-lg">×</span>
             </button>
           </div>
         </div>
@@ -559,7 +562,7 @@ export default function Points() {
                           </Button>
                         </DialogTrigger>
 
-                        <DialogContent>
+                        <DialogContent className="max-h-[90dvh] overflow-y-auto w-[calc(100vw-2rem)] sm:w-full sm:max-w-md p-4 sm:p-6">
                           <DialogHeader>
                             <DialogTitle>
                               {redeemSuccess ? "Penukaran Berhasil!" : "Kode QR Penukaran Poin"}
@@ -573,21 +576,21 @@ export default function Points() {
 
                           {redeemSuccess ? (
                             /* ── SUCCESS SCREEN ── */
-                            <div className="flex flex-col items-center gap-5 py-4">
-                              <div className="flex items-center justify-center w-20 h-20 rounded-full bg-green-100">
-                                <CheckCircle2 className="h-10 w-10 text-green-600" />
+                            <div className="flex flex-col items-center gap-4 py-3">
+                              <div className="flex items-center justify-center w-16 h-16 rounded-full bg-green-100">
+                                <CheckCircle2 className="h-8 w-8 text-green-600" />
                               </div>
                               <div className="text-center space-y-1">
-                                <p className="font-heading text-xl font-bold text-foreground">
+                                <p className="font-heading text-lg font-bold text-foreground">
                                   {redeemSuccess.reward}
                                 </p>
                                 {redeemSuccess.nama && (
                                   <p className="text-muted-foreground text-sm">Halo, <span className="font-semibold">{redeemSuccess.nama}</span>!</p>
                                 )}
-                                <p className="text-sm text-muted-foreground mt-2">Sisa poin Anda</p>
-                                <p className="font-heading text-4xl font-bold text-green-600">
+                                <p className="text-xs text-muted-foreground mt-1">Sisa poin Anda</p>
+                                <p className="font-heading text-3xl font-bold text-green-600">
                                   {redeemSuccess.balance.toLocaleString("id-ID")}
-                                  <span className="text-base font-normal text-muted-foreground ml-1">poin</span>
+                                  <span className="text-sm font-normal text-muted-foreground ml-1">poin</span>
                                 </p>
                               </div>
                               <Button className="w-full" onClick={closeRedeemDialog}>
@@ -596,20 +599,21 @@ export default function Points() {
                             </div>
                           ) : (
                             /* ── QR SCREEN ── */
-                            <div className="flex flex-col items-center gap-5 py-4">
-                              <div className="p-4 rounded-2xl bg-card border border-border shadow-card">
+                            <div className="flex flex-col items-center gap-4 py-2">
+                              <div className="p-3 rounded-2xl bg-card border border-border shadow-sm">
                                 {redeemPayload && (
                                   <QRCodeSVG
                                     value={redeemPayload}
-                                    size={220}
+                                    size={180}
                                     level="M"
                                     includeMargin={false}
+                                    style={{ display: "block", width: "100%", height: "auto", maxWidth: 180 }}
                                   />
                                 )}
                               </div>
 
                               <div className="text-center space-y-0.5">
-                                <p className="font-heading text-lg font-bold text-foreground">
+                                <p className="font-heading text-base font-bold text-foreground">
                                   {selectedReward?.name}
                                 </p>
                                 <p className="text-sm font-semibold text-action">
@@ -620,16 +624,16 @@ export default function Points() {
                                 </p>
                               </div>
 
-                              <div className="w-full p-4 rounded-xl bg-secondary space-y-2.5">
+                              <div className="w-full p-3 rounded-xl bg-secondary space-y-2">
                                 <p className="text-xs font-semibold text-secondary-foreground uppercase tracking-wide">Langkah penukaran</p>
-                                <ol className="space-y-2">
+                                <ol className="space-y-1.5">
                                   {[
                                     "Tunjukkan QR ini kepada kasir BESTI.",
                                     "Kasir akan memindai QR untuk memproses penukaran.",
                                     "Tap tombol di bawah setelah kasir selesai memindai.",
                                   ].map((step, i) => (
-                                    <li key={i} className="flex items-start gap-2.5 text-sm text-muted-foreground">
-                                      <span className="shrink-0 w-5 h-5 rounded-full bg-action/15 text-action text-xs font-bold flex items-center justify-center mt-0.5">{i + 1}</span>
+                                    <li key={i} className="flex items-start gap-2 text-xs text-muted-foreground">
+                                      <span className="shrink-0 w-4 h-4 rounded-full bg-action/15 text-action text-[10px] font-bold flex items-center justify-center mt-0.5">{i + 1}</span>
                                       {step}
                                     </li>
                                   ))}
@@ -640,7 +644,7 @@ export default function Points() {
                               <div className="w-full space-y-2">
                                 <Button
                                   variant="outline"
-                                  size="lg"
+                                  size="default"
                                   className="w-full"
                                   onClick={checkRedeemStatus}
                                   disabled={checkingStatus}
@@ -652,12 +656,12 @@ export default function Points() {
                                   )}
                                 </Button>
                                 {statusMsg?.type === "pending" && (
-                                  <p className="text-center text-sm text-muted-foreground">
+                                  <p className="text-center text-xs text-muted-foreground">
                                     Penukaran belum diproses. Pastikan kasir telah memindai QR Anda, lalu coba lagi.
                                   </p>
                                 )}
                                 {statusMsg?.type === "error" && (
-                                  <p className="text-center text-sm text-destructive">
+                                  <p className="text-center text-xs text-destructive">
                                     Tidak dapat terhubung. Periksa koneksi internet Anda lalu coba lagi.
                                   </p>
                                 )}
