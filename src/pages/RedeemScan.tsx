@@ -126,9 +126,9 @@ export default function RedeemScan() {
         setStage({
           id: "success",
           txn_id: json.txn_id,
-          nama: json.data?.nama ?? "",
-          reward: json.data?.item ?? payload.reward_name,
-          balance_after: json.data?.balance_after ?? 0,
+          nama: json.nama ?? "",
+          reward: json.item ?? payload.reward_name,
+          balance_after: json.balance_after ?? 0,
         });
         setTimeout(() => window.Telegram?.WebApp?.close(), 3000);
       } else {
