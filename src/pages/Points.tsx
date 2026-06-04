@@ -160,6 +160,30 @@ export default function Points() {
   const [redeemSuccess, setRedeemSuccess] = useState<{ reward: string; balance: number; nama: string } | null>(null);
   const pollingRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
+  // ── Helpers ──
+  function playCeting() {
+    try {
+      const ctx = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
+      const now = ctx.currentTime;
+      const pairs: [number, number, number][] = [
+        [1318.51, now, 0.45],
+        [1760, now + 0.12, 0.55],
+      ];
+      pairs.forEach(([freq, start, dur]) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, start);
+        gain.gain.setValueAtTime(0.6, start);
+        gain.gain.exponentialRampToValueAtTime(0.001, start + dur);
+        osc.start(start);
+        osc.stop(start + dur);
+      });
+    } catch { /* AudioContext not available */ }
+  }
+
   // ── Effects after all state ──
 
   // Reactive to URL params — fires when navigated back from /scan with ?redeemed=1
@@ -187,13 +211,13 @@ export default function Points() {
           const json = await res.json();
           if (json.success && json.points < data.points) {
             clearInterval(pollingRef.current!);
+            playCeting();
             const successData = {
               reward: selectedReward.name,
               balance: json.points,
               nama: json.name ?? data.name ?? "",
             };
             setRedeemSuccess(successData);
-            setRedeemNotif({ reward: successData.reward, balance: String(successData.balance), nama: successData.nama });
             setData((prev) => prev ? { ...prev, points: json.points } : prev);
           }
         } catch { /* silent */ }
@@ -214,13 +238,13 @@ export default function Points() {
       });
       const json = await res.json();
       if (json.success && json.points < data.points) {
+        playCeting();
         const successData = {
           reward: selectedReward.name,
           balance: json.points,
           nama: json.name ?? data.name ?? "",
         };
         setRedeemSuccess(successData);
-        setRedeemNotif({ reward: successData.reward, balance: String(successData.balance), nama: successData.nama });
         setData((prev) => prev ? { ...prev, points: json.points } : prev);
       } else {
         setStatusMsg({ type: "pending" });

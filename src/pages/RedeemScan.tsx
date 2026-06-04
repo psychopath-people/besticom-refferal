@@ -30,6 +30,29 @@ declare global {
   }
 }
 
+function playCeting() {
+  try {
+    const ctx = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
+    const now = ctx.currentTime;
+    const pairs: [number, number, number][] = [
+      [1318.51, now, 0.45],
+      [1760, now + 0.12, 0.55],
+    ];
+    pairs.forEach(([freq, start, dur]) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(freq, start);
+      gain.gain.setValueAtTime(0.6, start);
+      gain.gain.exponentialRampToValueAtTime(0.001, start + dur);
+      osc.start(start);
+      osc.stop(start + dur);
+    });
+  } catch { /* AudioContext not available */ }
+}
+
 export default function RedeemScan() {
   const navigate = useNavigate();
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -154,6 +177,7 @@ export default function RedeemScan() {
         return;
       }
       if (json.success) {
+        playCeting();
         const successData = {
           id: "success" as const,
           txn_id: String(json.txn_id ?? ""),
@@ -229,6 +253,47 @@ export default function RedeemScan() {
           </div>
         )}
 
+        {/* SUCCESS — fixed fullscreen overlay */}
+        {stage.id === "success" && (
+          <div className="fixed inset-0 z-30 flex flex-col items-center justify-center bg-black/85 backdrop-blur-sm px-6">
+            {/* Pulse rings */}
+            <div className="relative flex items-center justify-center mb-6">
+              <div className="absolute w-32 h-32 rounded-full bg-green-500/20 animate-ping" />
+              <div className="absolute w-24 h-24 rounded-full bg-green-500/30 animate-ping" style={{ animationDelay: "0.2s" }} />
+              <div className="relative w-20 h-20 rounded-full bg-green-500 flex items-center justify-center shadow-xl shadow-green-500/40">
+                <CheckCircle2 className="h-10 w-10 text-white" strokeWidth={2.5} />
+              </div>
+            </div>
+
+            <h2 className="text-2xl font-heading font-extrabold text-white mb-1">Redeem Berhasil!</h2>
+            <p className="text-green-400 text-base font-semibold mb-4">{stage.reward}</p>
+
+            <div className="w-full max-w-xs bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 space-y-2 text-center mb-6">
+              {stage.nama && (
+                <p className="text-white/80 text-sm">
+                  Pelanggan: <span className="font-bold text-white">{stage.nama}</span>
+                </p>
+              )}
+              <div className="py-2">
+                <p className="text-white/50 text-xs mb-1">Sisa poin pelanggan</p>
+                <p className="font-heading text-4xl font-extrabold text-green-400">{stage.balance_after.toLocaleString("id-ID")}</p>
+                <p className="text-white/40 text-xs">poin</p>
+              </div>
+              {stage.txn_id && (
+                <p className="text-white/30 text-[10px] font-mono border-t border-white/10 pt-2">{stage.txn_id}</p>
+              )}
+            </div>
+
+            <button
+              onClick={restart}
+              className="w-full max-w-xs py-3.5 rounded-xl bg-green-500 text-white font-bold text-base active:opacity-80 transition-opacity shadow-lg shadow-green-500/30"
+            >
+              Scan QR Berikutnya
+            </button>
+            <p className="text-white/30 text-xs mt-3">Otomatis kembali dalam beberapa detik...</p>
+          </div>
+        )}
+
         {/* Overlay panel bawah */}
         <div className="absolute bottom-0 left-0 right-0 z-10">
           {/* DETECTED */}
@@ -296,47 +361,6 @@ export default function RedeemScan() {
                 <Loader2 className="h-6 w-6 text-green-400 animate-spin" />
                 <span className="text-white font-semibold">Memproses redeem...</span>
               </div>
-            </div>
-          )}
-
-          {/* SUCCESS — fullscreen overlay */}
-          {stage.id === "success" && (
-            <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/80 backdrop-blur-sm px-6">
-              {/* Pulse rings */}
-              <div className="relative flex items-center justify-center mb-6">
-                <div className="absolute w-32 h-32 rounded-full bg-green-500/20 animate-ping" />
-                <div className="absolute w-24 h-24 rounded-full bg-green-500/30 animate-ping" style={{ animationDelay: "0.2s" }} />
-                <div className="relative w-20 h-20 rounded-full bg-green-500 flex items-center justify-center shadow-xl shadow-green-500/40">
-                  <CheckCircle2 className="h-10 w-10 text-white" strokeWidth={2.5} />
-                </div>
-              </div>
-
-              <h2 className="text-2xl font-heading font-extrabold text-white mb-1">Redeem Berhasil!</h2>
-              <p className="text-green-400 text-base font-semibold mb-4">{stage.reward}</p>
-
-              <div className="w-full max-w-xs bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 space-y-2 text-center mb-6">
-                {stage.nama && (
-                  <p className="text-white/80 text-sm">
-                    Pelanggan: <span className="font-bold text-white">{stage.nama}</span>
-                  </p>
-                )}
-                <div className="py-2">
-                  <p className="text-white/50 text-xs mb-1">Sisa poin pelanggan</p>
-                  <p className="font-heading text-4xl font-extrabold text-green-400">{stage.balance_after.toLocaleString("id-ID")}</p>
-                  <p className="text-white/40 text-xs">poin</p>
-                </div>
-                {stage.txn_id && (
-                  <p className="text-white/30 text-[10px] font-mono border-t border-white/10 pt-2">{stage.txn_id}</p>
-                )}
-              </div>
-
-              <button
-                onClick={restart}
-                className="w-full max-w-xs py-3.5 rounded-xl bg-green-500 text-white font-bold text-base active:opacity-80 transition-opacity shadow-lg shadow-green-500/30"
-              >
-                Scan QR Berikutnya
-              </button>
-              <p className="text-white/30 text-xs mt-3">Otomatis kembali dalam beberapa detik...</p>
             </div>
           )}
 
