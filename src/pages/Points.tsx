@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -147,6 +147,7 @@ export default function Points() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [redeemNotif, setRedeemNotif] = useState<{ reward: string; balance: string; nama: string } | null>(null);
 
+  // Reactive to URL params — fires when navigated back from /scan with ?redeemed=1
   useEffect(() => {
     if (searchParams.get("redeemed") === "1") {
       setRedeemNotif({
@@ -156,7 +157,35 @@ export default function Points() {
       });
       setSearchParams({}, { replace: true });
     }
-  }, []);
+  }, [searchParams]);
+
+  // Auto-poll every 5s while QR dialog is open and no success yet
+  useEffect(() => {
+    if (redeemOpen && !redeemSuccess && data && selectedReward) {
+      pollingRef.current = setInterval(async () => {
+        try {
+          const res = await fetch(WEBHOOK_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ phone: data.phone, last_four: lastFour, action: "check_points" }),
+          });
+          const json = await res.json();
+          if (json.success && json.points < data.points) {
+            clearInterval(pollingRef.current!);
+            const successData = {
+              reward: selectedReward.name,
+              balance: json.points,
+              nama: json.name ?? data.name ?? "",
+            };
+            setRedeemSuccess(successData);
+            setRedeemNotif({ reward: successData.reward, balance: String(successData.balance), nama: successData.nama });
+            setData((prev) => prev ? { ...prev, points: json.points } : prev);
+          }
+        } catch { /* silent */ }
+      }, 5000);
+    }
+    return () => { if (pollingRef.current) clearInterval(pollingRef.current); };
+  }, [redeemOpen, redeemSuccess]);
 
   const [phone, setPhone] = useState("");
   const [lastFour, setLastFour] = useState("");
@@ -169,6 +198,7 @@ export default function Points() {
   const [checkingStatus, setCheckingStatus] = useState(false);
   const [statusMsg, setStatusMsg] = useState<{ type: "pending" | "error" } | null>(null);
   const [redeemSuccess, setRedeemSuccess] = useState<{ reward: string; balance: number; nama: string } | null>(null);
+  const pollingRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   async function checkRedeemStatus() {
     if (!data || !selectedReward) return;
@@ -302,29 +332,36 @@ export default function Points() {
 
   return (
     <Layout>
+      {/* ── Success overlay notification ── */}
       {redeemNotif && (
-        <div className="bg-green-600 text-white">
-          <div className="container-custom py-3 px-4 flex items-start gap-3">
-            <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5" />
-            <div className="flex-1 min-w-0">
-              <p className="font-bold text-sm sm:text-base">Redeem Berhasil!</p>
-              <p className="text-green-100 text-xs sm:text-sm mt-0.5 break-words">
-                {redeemNotif.nama && (
-                  <span className="font-semibold">{redeemNotif.nama}</span>
-                )}
-                {redeemNotif.nama && " — "}
-                <span className="font-semibold">{redeemNotif.reward}</span> berhasil ditukarkan.
-                {redeemNotif.balance && (
-                  <> Sisa: <span className="font-bold">{Number(redeemNotif.balance).toLocaleString("id-ID")} poin</span>.</>
-                )}
-              </p>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-fade-in">
+          <div className="bg-white dark:bg-[#1a1625] rounded-2xl shadow-2xl border border-green-200 dark:border-purple-700/50 p-8 max-w-sm w-full text-center space-y-4">
+            {/* Animated checkmark */}
+            <div className="relative flex items-center justify-center">
+              <div className="absolute w-20 h-20 rounded-full bg-green-100 dark:bg-green-900/30 animate-ping opacity-30" />
+              <div className="relative w-16 h-16 rounded-full bg-green-500 dark:bg-green-600 flex items-center justify-center shadow-lg">
+                <CheckCircle2 className="h-9 w-9 text-white" />
+              </div>
+            </div>
+            <div className="space-y-1">
+              <h3 className="font-heading text-xl font-bold text-gray-900 dark:text-white">Redeem Berhasil!</h3>
+              {redeemNotif.nama && (
+                <p className="text-gray-500 dark:text-gray-400 text-sm">Halo, <span className="font-semibold text-gray-700 dark:text-gray-200">{redeemNotif.nama}</span>!</p>
+              )}
+              <p className="font-semibold text-green-600 dark:text-green-400">{redeemNotif.reward}</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">berhasil ditukarkan</p>
+              {redeemNotif.balance && (
+                <div className="mt-2 py-2 px-4 rounded-xl bg-green-50 dark:bg-green-900/20 inline-block">
+                  <span className="text-xs text-gray-500 dark:text-gray-400">Sisa poin: </span>
+                  <span className="font-bold text-green-600 dark:text-green-400">{Number(redeemNotif.balance).toLocaleString("id-ID")} poin</span>
+                </div>
+              )}
             </div>
             <button
               onClick={() => setRedeemNotif(null)}
-              className="text-green-200 hover:text-white leading-none shrink-0 p-1 -mr-1"
-              aria-label="Tutup"
+              className="w-full py-2.5 rounded-xl bg-green-500 dark:bg-purple-600 hover:bg-green-600 dark:hover:bg-purple-700 text-white font-bold text-sm transition-colors"
             >
-              <span className="text-lg">×</span>
+              Tutup
             </button>
           </div>
         </div>
@@ -600,14 +637,17 @@ export default function Points() {
                           ) : (
                             /* ── QR SCREEN ── */
                             <div className="flex flex-col items-center gap-4 py-2">
-                              <div className="p-3 rounded-2xl bg-card border border-border shadow-sm">
+                              {/* QR always on white bg so scanner can read in any theme */}
+                              <div className="p-4 rounded-2xl bg-white border-2 border-gray-200 shadow-sm">
                                 {redeemPayload && (
                                   <QRCodeSVG
                                     value={redeemPayload}
-                                    size={180}
+                                    size={192}
                                     level="M"
+                                    bgColor="#FFFFFF"
+                                    fgColor="#000000"
                                     includeMargin={false}
-                                    style={{ display: "block", width: "100%", height: "auto", maxWidth: 180 }}
+                                    style={{ display: "block", width: "100%", height: "auto", maxWidth: 192 }}
                                   />
                                 )}
                               </div>
