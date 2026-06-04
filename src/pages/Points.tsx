@@ -145,7 +145,22 @@ function normalizePhone(input: string) {
 
 export default function Points() {
   const [searchParams, setSearchParams] = useSearchParams();
+
+  // ── All state first ──
   const [redeemNotif, setRedeemNotif] = useState<{ reward: string; balance: string; nama: string } | null>(null);
+  const [phone, setPhone] = useState("");
+  const [lastFour, setLastFour] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<PointsResponse | null>(null);
+  const [selectedReward, setSelectedReward] = useState<RewardItem | null>(null);
+  const [activeCategory, setActiveCategory] = useState<RewardItem["category"] | "semua">("semua");
+  const [redeemOpen, setRedeemOpen] = useState(false);
+  const [checkingStatus, setCheckingStatus] = useState(false);
+  const [statusMsg, setStatusMsg] = useState<{ type: "pending" | "error" } | null>(null);
+  const [redeemSuccess, setRedeemSuccess] = useState<{ reward: string; balance: number; nama: string } | null>(null);
+  const pollingRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // ── Effects after all state ──
 
   // Reactive to URL params — fires when navigated back from /scan with ?redeemed=1
   useEffect(() => {
@@ -186,19 +201,6 @@ export default function Points() {
     }
     return () => { if (pollingRef.current) clearInterval(pollingRef.current); };
   }, [redeemOpen, redeemSuccess]);
-
-  const [phone, setPhone] = useState("");
-  const [lastFour, setLastFour] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<PointsResponse | null>(null);
-
-  const [selectedReward, setSelectedReward] = useState<RewardItem | null>(null);
-  const [activeCategory, setActiveCategory] = useState<RewardItem["category"] | "semua">("semua");
-  const [redeemOpen, setRedeemOpen] = useState(false);
-  const [checkingStatus, setCheckingStatus] = useState(false);
-  const [statusMsg, setStatusMsg] = useState<{ type: "pending" | "error" } | null>(null);
-  const [redeemSuccess, setRedeemSuccess] = useState<{ reward: string; balance: number; nama: string } | null>(null);
-  const pollingRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   async function checkRedeemStatus() {
     if (!data || !selectedReward) return;
