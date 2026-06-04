@@ -1,133 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* BESTI Computer Design System
-   A confident, tech-forward design for Indonesian IT retail
-   Inspired by international e-commerce aesthetics
+   Dark Navy #0B1E35 + Teal-Cyan #0EA5E9 + Neon Green #22C55E
+   Sesuai logo BESTI (gaming/tech mascot style)
 */
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
 
 @layer base {
   :root {
-    /* BESTI brand: blue + black + green + white + sky blue
-       Modern 2026 aesthetic — deep navy ink, electric brand blue,
-       fresh mint green accent, soft sky tints. */
-
-    --background: 210 40% 99%;
-    --foreground: 222 47% 8%;
+    /* BESTI brand: dark navy bg + electric teal + neon green CTA */
+    --background: 210 20% 98%;
+    --foreground: 214 30% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 8%;
+    --card-foreground: 214 30% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 8%;
+    --popover-foreground: 214 30% 12%;
 
-    /* Primary: deep ink black with subtle blue undertone (logo black) */
-    --primary: 222 47% 8%;
+    /* Primary: dark navy #0B1E35 — navbar, footer, hero bg */
+    --primary: 214 68% 13%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary: soft sky-blue surface */
-    --secondary: 205 60% 96%;
-    --secondary-foreground: 222 47% 12%;
+    /* Secondary: light teal tint surface */
+    --secondary: 199 60% 95%;
+    --secondary-foreground: 214 50% 15%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 45%;
+    --muted: 210 25% 96%;
+    --muted-foreground: 215 16% 47%;
 
-    /* Accent: BESTI brand blue (logo blue) */
-    --accent: 215 92% 52%;
+    /* Accent: Neon green #22C55E — CTA, buttons, highlights */
+    --accent: 142 71% 45%;
     --accent-foreground: 0 0% 100%;
 
-    /* Brand sky — light blue tint for highlights & soft surfaces */
-    --brand-sky: 200 95% 88%;
-    --brand-sky-foreground: 222 47% 12%;
+    /* Teal: electric cyan-blue #0EA5E9 — from the mascot bird */
+    --teal: 199 89% 48%;
+    --teal-foreground: 0 0% 100%;
+    --teal-light: 199 80% 93%;
 
-    /* Action: fresh green (logo green) — used for success / loyalty / WA */
-    --action: 152 72% 42%;
+    /* Gold: poin/reward */
+    --gold: 51 100% 50%;
+    --gold-foreground: 30 60% 20%;
+    --gold-light: 51 100% 94%;
+
+    /* Action: WhatsApp green */
+    --action: 142 71% 42%;
     --action-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 215 92% 52%;
+    --border: 214 20% 88%;
+    --input: 214 20% 88%;
+    --ring: 142 71% 45%;
 
     --radius: 0.875rem;
 
-    /* Brand gradients (modern 2026 — soft tech glow) */
-    --gradient-brand: linear-gradient(135deg, hsl(215 92% 52%) 0%, hsl(200 95% 60%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(222 47% 8%) 0%, hsl(220 60% 14%) 50%, hsl(215 92% 22%) 100%);
-    --gradient-soft: linear-gradient(180deg, hsl(205 60% 97%) 0%, hsl(210 40% 99%) 100%);
-    --gradient-mesh: radial-gradient(at 20% 10%, hsl(215 92% 52% / 0.18) 0px, transparent 50%),
-                     radial-gradient(at 80% 0%, hsl(200 95% 75% / 0.22) 0px, transparent 50%),
-                     radial-gradient(at 50% 100%, hsl(152 72% 60% / 0.12) 0px, transparent 50%);
+    /* Gradients */
+    --gradient-brand: linear-gradient(135deg, hsl(214 68% 13%) 0%, hsl(199 89% 35%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(214 68% 10%) 0%, hsl(214 68% 14%) 60%, hsl(214 65% 18%) 100%);
+    --gradient-green: linear-gradient(135deg, hsl(142 71% 45%) 0%, hsl(158 74% 40%) 100%);
+    --gradient-soft: linear-gradient(180deg, hsl(199 60% 96%) 0%, hsl(210 20% 98%) 100%);
+    --gradient-referral: linear-gradient(135deg, hsl(214 68% 13%) 0%, hsl(199 89% 35%) 100%);
 
-    /* Shadows — soft, modern, blue-tinted */
-    --shadow-card: 0 1px 2px 0 hsl(222 47% 8% / 0.04), 0 8px 24px -8px hsl(215 92% 52% / 0.08);
-    --shadow-card-hover: 0 4px 12px -2px hsl(222 47% 8% / 0.08), 0 16px 40px -12px hsl(215 92% 52% / 0.18);
-    --shadow-elevated: 0 12px 48px -8px hsl(215 92% 52% / 0.25);
-    --shadow-glow: 0 0 0 1px hsl(215 92% 52% / 0.1), 0 8px 32px -4px hsl(215 92% 52% / 0.3);
+    /* Shadows */
+    --shadow-card: 0 1px 2px 0 hsl(214 68% 10% / 0.05), 0 6px 20px -6px hsl(199 89% 48% / 0.10);
+    --shadow-card-hover: 0 4px 12px -2px hsl(214 68% 10% / 0.08), 0 16px 40px -12px hsl(199 89% 48% / 0.18);
+    --shadow-elevated: 0 12px 48px -8px hsl(214 68% 13% / 0.30);
+    --shadow-glow: 0 0 0 1px hsl(142 71% 45% / 0.20), 0 8px 32px -4px hsl(142 71% 45% / 0.25);
+    --shadow-gold: 0 4px 16px -4px hsl(51 100% 50% / 0.4);
 
-    /* Sidebar defaults */
+    /* Sidebar */
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary: 214 68% 13%;
     --sidebar-primary-foreground: 0 0% 98%;
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 199 89% 48%;
   }
 
   .dark {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
+    --background: 214 68% 7%;
+    --foreground: 210 40% 96%;
 
-    --card: 222 47% 9%;
-    --card-foreground: 210 40% 98%;
+    --card: 214 68% 10%;
+    --card-foreground: 210 40% 96%;
 
-    --popover: 222 47% 9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 214 68% 10%;
+    --popover-foreground: 210 40% 96%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222 47% 8%;
+    --primary: 199 80% 65%;
+    --primary-foreground: 214 68% 10%;
 
-    --secondary: 217 33% 14%;
-    --secondary-foreground: 210 40% 95%;
+    --secondary: 214 40% 16%;
+    --secondary-foreground: 210 40% 90%;
 
-    --muted: 217 33% 14%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 214 40% 16%;
+    --muted-foreground: 215 20% 62%;
 
-    --accent: 215 92% 60%;
+    --accent: 142 65% 52%;
     --accent-foreground: 0 0% 100%;
 
-    --brand-sky: 200 95% 70%;
-    --brand-sky-foreground: 222 47% 8%;
+    --teal: 199 89% 58%;
+    --teal-foreground: 0 0% 100%;
+    --teal-light: 199 60% 18%;
 
-    --action: 152 72% 50%;
+    --gold: 51 100% 55%;
+    --gold-foreground: 30 60% 15%;
+    --gold-light: 51 60% 18%;
+
+    --action: 142 71% 50%;
     --action-foreground: 0 0% 100%;
 
     --destructive: 0 62% 50%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217 33% 18%;
-    --input: 217 33% 18%;
-    --ring: 215 92% 60%;
+    --border: 214 40% 18%;
+    --input: 214 40% 18%;
+    --ring: 142 65% 52%;
 
-    --shadow-card: 0 1px 3px 0 hsl(0 0% 0% / 0.2);
-    --shadow-card-hover: 0 4px 16px 0 hsl(0 0% 0% / 0.3);
-    --shadow-elevated: 0 8px 32px 0 hsl(0 0% 0% / 0.4);
+    --shadow-card: 0 1px 3px 0 hsl(0 0% 0% / 0.25);
+    --shadow-card-hover: 0 4px 16px 0 hsl(0 0% 0% / 0.35);
+    --shadow-elevated: 0 8px 32px 0 hsl(0 0% 0% / 0.45);
 
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-background: 214 68% 9%;
+    --sidebar-foreground: 210 40% 90%;
+    --sidebar-primary: 199 89% 58%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 214 40% 16%;
+    --sidebar-accent-foreground: 210 40% 90%;
+    --sidebar-border: 214 40% 18%;
+    --sidebar-ring: 199 89% 58%;
   }
 }
 
@@ -160,25 +168,10 @@
     @apply transition-all duration-200 ease-out;
     box-shadow: var(--shadow-card);
   }
-  
+
   .card-hover:hover {
     box-shadow: var(--shadow-card-hover);
     transform: translateY(-2px);
-  }
-
-  /* Button variants */
-  .btn-accent {
-    @apply bg-accent text-accent-foreground font-semibold;
-    @apply transition-all duration-200 ease-out;
-    @apply hover:brightness-110 active:scale-[0.98];
-  }
-
-  .btn-action {
-    @apply font-semibold;
-    background: hsl(var(--action));
-    color: hsl(var(--action-foreground));
-    @apply transition-all duration-200 ease-out;
-    @apply hover:brightness-110 active:scale-[0.98];
   }
 
   /* Trust badge styling */
@@ -211,13 +204,18 @@
     @apply w-2/3 text-foreground text-sm;
   }
 
-  /* Gradient text — brand blue glow */
+  /* Gradient text */
   .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-orange);
+  }
+
+  .gradient-text-navy {
     @apply bg-clip-text text-transparent;
     background-image: var(--gradient-brand);
   }
 
-  /* Modern surfaces */
+  /* Surfaces */
   .surface-mesh {
     background-image: var(--gradient-mesh);
   }
@@ -235,56 +233,86 @@
     box-shadow: var(--shadow-glow);
   }
 
+  /* Gold badge for poin */
+  .poin-badge {
+    background: hsl(var(--gold-light));
+    color: hsl(var(--gold-foreground));
+    border: 1px solid hsl(var(--gold) / 0.4);
+    @apply px-2.5 py-1 rounded-full text-xs font-semibold;
+  }
+
   /* Brand partner logos */
   .brand-logo {
-    @apply h-8 md:h-10 object-contain grayscale opacity-60;
+    @apply h-7 md:h-9 object-contain grayscale opacity-50;
     @apply transition-all duration-200;
     @apply hover:grayscale-0 hover:opacity-100;
   }
+
+  /* Marquee track */
+  .marquee-track {
+    @apply flex gap-12 items-center;
+    animation: marquee 28s linear infinite;
+    width: max-content;
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  /* Tier badge */
+  .tier-bronze  { @apply bg-amber-100 text-amber-800 border border-amber-200; }
+  .tier-silver  { @apply bg-slate-100 text-slate-700 border border-slate-200; }
+  .tier-gold    { @apply bg-yellow-50 text-yellow-700 border border-yellow-300; }
+  .tier-platinum { @apply bg-violet-50 text-violet-700 border border-violet-200; }
 }
 
 @layer utilities {
-  /* Focus states for accessibility */
   .focus-ring {
     @apply focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
   }
 
-  /* Smooth page transitions */
   .page-transition {
     @apply animate-fade-in;
+  }
+
+  /* Tabular numbers for prices */
+  .tabular {
+    font-variant-numeric: tabular-nums;
   }
 }
 
 /* Custom keyframes */
 @keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(51 100% 50% / 0.4); }
+  50%       { box-shadow: 0 0 0 6px hsl(51 100% 50% / 0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+@keyframes slide-in-bottom {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
 }

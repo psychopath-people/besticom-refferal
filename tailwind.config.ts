@@ -47,6 +47,16 @@ export default {
           DEFAULT: "hsl(var(--action))",
           foreground: "hsl(var(--action-foreground))",
         },
+        teal: {
+          DEFAULT: "hsl(var(--teal))",
+          foreground: "hsl(var(--teal-foreground))",
+          light: "hsl(var(--teal-light))",
+        },
+        gold: {
+          DEFAULT: "hsl(var(--gold))",
+          foreground: "hsl(var(--gold-foreground))",
+          light: "hsl(var(--gold-light))",
+        },
         "brand-sky": {
           DEFAULT: "hsl(var(--brand-sky))",
           foreground: "hsl(var(--brand-sky-foreground))",
@@ -101,6 +111,22 @@ export default {
           from: { opacity: "0", transform: "scale(0.95)" },
           to: { opacity: "1", transform: "scale(1)" },
         },
+        "slide-in-bottom": {
+          from: { opacity: "0", transform: "translateY(24px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "float": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-6px)" },
+        },
+        "marquee": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
+        "pulse-gold": {
+          "0%, 100%": { boxShadow: "0 0 0 0 hsl(51 100% 50% / 0.4)" },
+          "50%": { boxShadow: "0 0 0 6px hsl(51 100% 50% / 0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -108,6 +134,10 @@ export default {
         "fade-in": "fade-in 0.5s ease-out forwards",
         "slide-up": "slide-up 0.6s ease-out forwards",
         "scale-in": "scale-in 0.4s ease-out forwards",
+        "slide-in-bottom": "slide-in-bottom 0.5s ease-out forwards",
+        "float": "float 3s ease-in-out infinite",
+        "marquee": "marquee 28s linear infinite",
+        "pulse-gold": "pulse-gold 2s ease-in-out infinite",
       },
       spacing: {
         "18": "4.5rem",
