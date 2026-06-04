@@ -1,6 +1,6 @@
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
-import { MapPin, Users, Award, Building2, MessageCircle } from "lucide-react";
+import { Users, Award, Building2, MessageCircle } from "lucide-react";
 
 const stats = [
   { value: "10+", label: "Tahun Pengalaman" },
@@ -94,13 +94,16 @@ export default function About() {
                 </p>
               </div>
             </div>
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100 dark:bg-[#1a1625] border border-gray-200 dark:border-purple-900/30">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center p-8">
-                  <MapPin className="h-12 w-12 text-green-500 dark:text-purple-400 mx-auto mb-4" />
-                  <p className="font-heading text-xl text-gray-900 dark:text-white">Plaza Marina Surabaya</p>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm">Toko Fisik Kami</p>
-                </div>
+            <div className="relative h-[380px] md:h-[460px] rounded-2xl overflow-hidden border border-gray-200 shadow-md">
+              <img
+                src="/foto-toko-suasana.jpeg"
+                alt="Toko BESTI Computer Plaza Marina Surabaya"
+                className="w-full h-full object-cover object-top"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+              <div className="absolute bottom-4 left-4">
+                <p className="text-white font-bold text-sm">BESTI Computer</p>
+                <p className="text-white/70 text-xs">Plaza Marina Lt.2, Surabaya</p>
               </div>
             </div>
           </div>
@@ -137,26 +140,74 @@ export default function About() {
         </div>
       </section>
 
-      {/* Partners */}
+      {/* Tim Kami */}
       <section className="py-14 md:py-20 bg-white dark:bg-[#0f0b1a]">
         <div className="container-custom">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h2 className="font-heading text-3xl text-gray-900 dark:text-white mb-4">
-              Partner Kami
+              Tim Kami
             </h2>
             <p className="text-gray-500 dark:text-gray-400">
-              Kami bekerja sama dengan instansi dan perusahaan terkemuka
+              Tim profesional dan berpengalaman siap melayani kebutuhan IT Anda
             </p>
           </div>
+          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+            <div className="rounded-2xl overflow-hidden border border-gray-100 dark:border-purple-900/30 shadow-sm">
+              <img src="/foto-tim-4.jpeg" alt="Tim BESTI Computer" className="w-full h-96 object-cover object-top" />
+              <div className="p-4 bg-white dark:bg-[#1a1625]">
+                <p className="font-semibold text-gray-900 dark:text-white">Tim Sales & Konsultasi</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">Siap membantu 6 hari seminggu</p>
+              </div>
+            </div>
+            <div className="rounded-2xl overflow-hidden border border-gray-100 dark:border-purple-900/30 shadow-sm">
+              <img src="/foto-tim-1.jpeg" alt="Tim BESTI Computer" className="w-full h-96 object-cover object-top" />
+              <div className="p-4 bg-white dark:bg-[#1a1625]">
+                <p className="font-semibold text-gray-900 dark:text-white">Tim Teknis & After-Sales</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">Garansi & servis produk terjamin</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* Partners / Instansi */}
+      <section className="py-14 md:py-20 bg-gray-50 dark:bg-[#0d0b16]">
+        <div className="container-custom">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <h2 className="font-heading text-3xl text-gray-900 dark:text-white mb-4">
+              Dipercaya Instansi & Perusahaan
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400">
+              Rekam jejak pengadaan IT untuk berbagai sektor
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
             {["Instansi Pemerintah", "Perusahaan Swasta", "Sekolah & Kampus", "UMKM & Startup"].map((type) => (
-              <div key={type} className="p-6 rounded-xl bg-gray-50 dark:bg-[#1a1625] border border-gray-100 dark:border-purple-900/30 text-center">
+              <div key={type} className="p-5 rounded-xl bg-white dark:bg-[#1a1625] border border-gray-100 dark:border-purple-900/30 text-center shadow-sm">
                 <Building2 className="h-8 w-8 text-green-500 dark:text-purple-400 mx-auto mb-3" />
-                <p className="font-medium text-gray-800 dark:text-gray-200">{type}</p>
+                <p className="font-medium text-gray-800 dark:text-gray-200 text-sm">{type}</p>
               </div>
             ))}
           </div>
+          {/* Event photos grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {[
+              { src: "/foto-event-1.jpeg", label: "Penandatanganan MoU", pos: "object-center" },
+              { src: "/foto-event-2.jpeg", label: "Serah Terima Pengadaan", pos: "object-top" },
+              { src: "/foto-pengiriman.jpeg", label: "Pengiriman Bulk Order", pos: "object-center" },
+              { src: "/foto-produk-asus.jpeg", label: "Stok ASUS ExpertCenter", pos: "object-center" },
+            ].map((item, i) => (
+              <div key={i} className="rounded-xl overflow-hidden border border-gray-100 shadow-sm">
+                <div className="aspect-[3/4] overflow-hidden">
+                  <img src={item.src} alt={item.label} className={`w-full h-full object-cover ${item.pos} hover:scale-105 transition-transform duration-500`} />
+                </div>
+                <p className="text-[11px] text-center text-gray-500 py-1.5 px-1 bg-white">{item.label}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-center text-xs text-gray-400 mt-4">
+            Dokumentasi kegiatan pengadaan & kerja sama dengan instansi mitra BESTI Computer
+          </p>
         </div>
       </section>
 

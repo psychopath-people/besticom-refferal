@@ -2,25 +2,25 @@ import { Star, Quote } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Staff IT",
-    company: "PT. Maju Bersama Surabaya",
-    initials: "MI",
+    name: "Rizal & Keluarga",
+    company: "Pelanggan Setia BESTI",
+    photo: "/foto-pelanggan-2.jpeg",
     rating: 5,
-    text: "Pelayanan cepat, produk original, harga bersaing. Sudah 3 tahun berlangganan untuk pengadaan IT kantor.",
+    text: "Pelayanannya ramah banget, staff-nya sabar jelasin produk. Beli laptop buat anak sekolah, dikasih bonus tas BESTI juga. Puas banget!",
   },
   {
-    name: "Kepala Lab Komputer",
-    company: "SMKN 5 Surabaya",
-    initials: "KL",
+    name: "Andika & Teman",
+    company: "Mahasiswa Surabaya",
+    photo: "/foto-pelanggan-1.jpeg",
     rating: 5,
-    text: "Pengadaan 30 unit PC untuk lab berjalan lancar. Dokumentasi SPK lengkap, garansi resmi, dan after-sales sangat responsif.",
+    text: "Harga bersaing, barang original dan bergaransi resmi. Sudah rekomendasiin BESTI ke banyak teman kampus. Wajib kesini!",
   },
   {
-    name: "Procurement Manager",
-    company: "CV. Karya Mandiri",
-    initials: "PM",
+    name: "Budi & Tim",
+    company: "Pengadaan IT Instansi",
+    photo: "/foto-pelanggan-3.jpeg",
     rating: 5,
-    text: "Sudah beberapa kali order laptop untuk karyawan baru. Prosesnya mudah, harga kompetitif, dan barang selalu sampai tepat waktu.",
+    text: "Pengadaan laptop untuk kantor berjalan lancar. Dokumentasi lengkap, after-sales responsif. BESTI jadi mitra IT terpercaya kami.",
   },
 ];
 
@@ -61,11 +61,8 @@ export function TestimonialSection() {
               </p>
 
               <div className="flex items-center gap-3 pt-2 border-t border-gray-100 dark:border-purple-900/30">
-                <div
-                  className="h-9 w-9 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0"
-                  style={{ background: "linear-gradient(135deg, #0B1E35, #0EA5E9)" }}
-                >
-                  {t.initials}
+                <div className="h-14 w-14 rounded-full overflow-hidden shrink-0 border-2 border-green-200">
+                  <img src={t.photo} alt={t.name} className="w-full h-full object-cover object-top" />
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-gray-800 dark:text-gray-100">{t.name}</p>

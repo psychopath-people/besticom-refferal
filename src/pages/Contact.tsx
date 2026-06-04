@@ -202,23 +202,48 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Map */}
+      {/* Foto Toko + Map */}
       <section id="location" className="pb-16">
-        <div className="container-custom">
-          <h2 className="font-heading text-2xl text-gray-900 dark:text-white mb-6">
-            Lokasi Toko
-          </h2>
-          <div className="aspect-[21/9] rounded-2xl overflow-hidden bg-gray-100 dark:bg-[#1a1625] border border-gray-200 dark:border-purple-900/30">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.6193855395!2d112.75!3d-7.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMTgnMDAuMCJTIDExMsKwNDUnMDAuMCJF!5e0!3m2!1sen!2sid!4v1600000000000!5m2!1sen!2sid"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="BESTI Computer Location"
-            />
+        <div className="container-custom space-y-8">
+          {/* Foto suasana toko */}
+          <div>
+            <h2 className="font-heading text-2xl text-gray-900 dark:text-white mb-6">
+              Suasana Toko
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {[
+                { src: "/foto-toko-depan.jpeg", label: "Tampak Depan", pos: "object-center" },
+                { src: "/foto-toko-suasana.jpeg", label: "Suasana Toko", pos: "object-top" },
+                { src: "/foto-pelanggan-2.jpeg", label: "Pelanggan Puas", pos: "object-top" },
+                { src: "/foto-toko-dalam-2.jpeg", label: "Area Produk", pos: "object-top" },
+              ].map((item) => (
+                <div key={item.src} className="rounded-xl overflow-hidden border border-gray-200 dark:border-purple-900/30 shadow-sm">
+                  <div className="aspect-[3/4] overflow-hidden">
+                    <img src={item.src} alt={item.label} className={`w-full h-full object-cover ${item.pos} hover:scale-105 transition-transform duration-500`} />
+                  </div>
+                  <p className="text-xs text-center text-gray-500 dark:text-gray-400 py-2 px-1 bg-white dark:bg-[#1a1625]">{item.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Map */}
+          <div>
+            <h2 className="font-heading text-2xl text-gray-900 dark:text-white mb-6">
+              Lokasi Toko
+            </h2>
+            <div className="aspect-[21/9] rounded-2xl overflow-hidden bg-gray-100 dark:bg-[#1a1625] border border-gray-200 dark:border-purple-900/30">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.6193855395!2d112.75!3d-7.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMTgnMDAuMCJTIDExMsKwNDUnMDAuMCJF!5e0!3m2!1sen!2sid!4v1600000000000!5m2!1sen!2sid"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="BESTI Computer Location"
+              />
+            </div>
           </div>
         </div>
       </section>

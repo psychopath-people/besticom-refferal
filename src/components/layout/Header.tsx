@@ -4,10 +4,9 @@ import {
   Menu, X, Phone, MapPin, Star, ChevronDown,
   Laptop, Monitor, Printer, Mouse,
   Truck, ShieldCheck, CreditCard, Gift,
-  Sun, Moon, MessageCircle,
+  MessageCircle,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useTheme } from "@/hooks/useTheme";
 
 const navigation = [
   { name: "Beranda", href: "/" },
@@ -38,7 +37,6 @@ export function Header() {
   const [categoryOpen, setCategoryOpen] = useState(false);
   const location = useLocation();
   const categoryRef = useRef<HTMLDivElement>(null);
-  const { theme, toggle } = useTheme();
 
   useEffect(() => {
     setMobileMenuOpen(false);
@@ -194,19 +192,6 @@ export function Header() {
                 Konsultasi
               </a>
 
-              {/* Dark/Light toggle */}
-              <button
-                type="button"
-                onClick={toggle}
-                className="p-2 rounded-lg border border-gray-200 dark:border-purple-900/50 bg-gray-50 dark:bg-[#1a1625] hover:bg-gray-100 dark:hover:bg-purple-900/30 transition-all"
-                aria-label={theme === "dark" ? "Mode terang" : "Mode gelap"}
-              >
-                {theme === "dark"
-                  ? <Sun className="h-4 w-4 text-yellow-400" />
-                  : <Moon className="h-4 w-4 text-gray-500" />
-                }
-              </button>
-
               {/* Mobile hamburger */}
               <button
                 type="button"
@@ -284,16 +269,15 @@ export function Header() {
                 <Star className="h-4 w-4 text-yellow-500 fill-yellow-400" />
                 Poin Saya
               </Link>
-              <button
-                type="button"
-                onClick={toggle}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-gray-500 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-purple-900/20 transition-all"
+              <a
+                href="https://wa.me/6281234567890?text=Halo%20BESTI,%20saya%20ingin%20konsultasi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold text-green-700 hover:bg-green-50 transition-all"
               >
-                {theme === "dark"
-                  ? <><Sun className="h-4 w-4 text-yellow-400" /><span>Terang</span></>
-                  : <><Moon className="h-4 w-4 text-gray-400" /><span>Gelap</span></>
-                }
-              </button>
+                <MessageCircle className="h-4 w-4 text-green-500" />
+                WhatsApp
+              </a>
             </div>
           </div>
         </div>

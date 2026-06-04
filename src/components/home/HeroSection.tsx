@@ -20,7 +20,8 @@ const slides = [
       "Laptop, PC, printer & aksesoris IT original bergaransi resmi. Dipercaya instansi, perusahaan, dan sekolah di Surabaya.",
     primaryCta: { label: "Lihat Produk", href: "/products" },
     secondaryCta: { label: "Tentang Kami", href: "/about" },
-    image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=1400&q=80",
+    image: "/foto-produk-laptop.jpeg",
+    imgPosition: "object-center",
   },
   {
     badge: "Program Loyalty Poin",
@@ -30,17 +31,8 @@ const slides = [
       "Setiap transaksi memberikan poin yang bisa ditukar diskon. Cek poin hanya dengan nomor telepon — tanpa aplikasi.",
     primaryCta: { label: "Cek Poin Saya", href: "/points" },
     secondaryCta: { label: "Daftar Member", href: "/member" },
-    image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1400&q=80",
-  },
-  {
-    badge: "Sistem Referral",
-    title: "Ajak Teman,",
-    highlight: "Kita Berdua Dapat Poin",
-    description:
-      "Bagikan kode referral unikmu. Setiap teman yang daftar — kamu dapat bonus poin, temanmu dapat poin selamat datang.",
-    primaryCta: { label: "Daftar & Dapat Kode", href: "/member" },
-    secondaryCta: { label: "Pelajari Cara Kerja", href: "/points" },
-    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1400&q=80",
+    image: "/foto-pelanggan-3.jpeg",
+    imgPosition: "object-top",
   },
   {
     badge: "Pengadaan Instansi",
@@ -50,17 +42,30 @@ const slides = [
       "Melayani pengadaan untuk instansi pemerintah, kampus, dan perusahaan. SPK, dokumentasi lengkap, after-sales terjamin.",
     primaryCta: { label: "Minta Penawaran", href: "/contact" },
     secondaryCta: { label: "Lihat Layanan", href: "/about" },
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&q=80",
+    image: "/foto-event-2.jpeg",
+    imgPosition: "object-center",
   },
   {
-    badge: "Flash Sale Mingguan",
-    title: "Harga Spesial Tiap",
-    highlight: "Rabu & Jumat",
+    badge: "Stok Selalu Ready",
+    title: "Ratusan Unit Siap",
+    highlight: "Kirim Hari Ini",
     description:
-      "Diskon produk pilihan setiap hari Rabu dan Jumat. Laptop, printer, dan aksesoris dengan harga terbaik. Stok terbatas.",
-    primaryCta: { label: "Lihat Promo", href: "/products" },
-    secondaryCta: { label: "Daftar Notifikasi", href: "/member" },
-    image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1400&q=80",
+      "Stok lengkap tersedia di toko kami di Plaza Marina Surabaya. PC rakitan, laptop, monitor, dan aksesoris siap ambil atau dikirim.",
+    primaryCta: { label: "Hubungi Kami", href: "/contact" },
+    secondaryCta: { label: "Lokasi Toko", href: "/contact#location" },
+    image: "/foto-produk-pcset.jpeg",
+    imgPosition: "object-center",
+  },
+  {
+    badge: "Toko Kami",
+    title: "Kunjungi BESTI",
+    highlight: "Plaza Marina Lt.2",
+    description:
+      "Toko komputer terlengkap di Plaza Marina Surabaya. Tim profesional siap membantu konsultasi kebutuhan IT Anda secara langsung.",
+    primaryCta: { label: "Lihat Lokasi", href: "/contact#location" },
+    secondaryCta: { label: "Tentang Kami", href: "/about" },
+    image: "/foto-toko-depan.jpeg",
+    imgPosition: "object-center",
   },
 ];
 
@@ -162,7 +167,7 @@ export function HeroSection() {
 
           {/* Right: image */}
           <div className="relative">
-            <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl aspect-[16/10]">
+            <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl h-[360px] md:h-[460px]">
               {slides.map((s, i) => (
                 <img
                   key={i}
@@ -173,6 +178,7 @@ export function HeroSection() {
                   loading={i === 0 ? "eager" : "lazy"}
                   className={cn(
                     "absolute inset-0 w-full h-full object-cover transition-opacity duration-700",
+                    s.imgPosition,
                     i === active ? "opacity-100" : "opacity-0"
                   )}
                 />
