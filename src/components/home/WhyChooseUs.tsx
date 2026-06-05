@@ -69,7 +69,7 @@ export function WhyChooseUs() {
             Mengapa Memilih <span className="text-green-500 dark:text-purple-400">BESTI?</span>
           </h2>
           <p className="text-gray-500 dark:text-gray-400 text-sm md:text-base">
-            Komitmen kami memberikan solusi IT terbaik dengan layanan profesional sejak 2014
+            Toko baru, tim berpengalaman — hadir sejak 2025 dengan lebih dari 10 tahun keahlian di industri IT
           </p>
         </div>
 

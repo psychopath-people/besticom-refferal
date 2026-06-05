@@ -1,14 +1,14 @@
 const brands = [
-  { name: "Lenovo", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Lenovo_logo_2015.svg/2560px-Lenovo_logo_2015.svg.png" },
-  { name: "ASUS", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/ASUS_Logo.svg/2560px-ASUS_Logo.svg.png" },
-  { name: "HP", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/HP_logo_2012.svg/1200px-HP_logo_2012.svg.png" },
-  { name: "Acer", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Acer_2011.svg/2560px-Acer_2011.svg.png" },
-  { name: "Dell", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Dell_Logo.svg/2048px-Dell_Logo.svg.png" },
-  { name: "MSI", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/MSI_Logo.svg/2560px-MSI_Logo.svg.png" },
-  { name: "Intel", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Intel_logo_2023.svg/1200px-Intel_logo_2023.svg.png" },
-  { name: "AMD", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/AMD_Logo.svg/1200px-AMD_Logo.svg.png" },
-  { name: "Axioo", logo: "https://axioo.com/wp-content/uploads/2021/03/axioo-logo.png" },
-  { name: "Zyrex", logo: "https://zyrex.com/wp-content/uploads/2020/09/logo-zyrex.png" },
+  { name: "Lenovo — Partner Resmi BESTI Computer Surabaya", logo: "/Lenovo_Global_Corporate_Logo.png" },
+  { name: "ASUS — Laptop & PC Resmi di BESTI Computer Surabaya", logo: "/asus-6630-logo-png-transparent.png" },
+  { name: "HP — Printer & Laptop Resmi di BESTI Computer Surabaya", logo: "/HP_logo_2012.svg.png" },
+  { name: "Acer — Partner Resmi BESTI Computer Surabaya", logo: "/Logo_Acer.png" },
+  { name: "Dell — Partner Resmi BESTI Computer Surabaya", logo: "/Dell_Logo.svg.png" },
+  { name: "MSI — Gaming & Laptop Resmi di BESTI Computer Surabaya", logo: "/png-clipart-laptop-msi-logo-video-game-laptop-electronics-computer-thumbnail.png" },
+  { name: "Intel — Prosesor Resmi di BESTI Computer Surabaya", logo: "/Intel_logo_(2006-2020).svg" },
+  { name: "AMD — Prosesor & GPU Resmi di BESTI Computer Surabaya", logo: "/AMD_Logo.png" },
+  { name: "Axioo — Laptop Lokal Resmi di BESTI Computer Surabaya", logo: "/Logo_Axioo_Baru.png" },
+  { name: "Zyrex — Laptop Lokal Resmi di BESTI Computer Surabaya", logo: "/lg-6603c25487b89-Zyrex.webp" },
 ];
 
 export function BrandPartners() {
@@ -29,16 +29,16 @@ export function BrandPartners() {
             {[...brands, ...brands].map((brand, i) => (
               <div
                 key={i}
-                className="flex items-center justify-center h-12 shrink-0 px-4"
+                className="flex items-center justify-center shrink-0 px-6"
               >
-                <img
-                  src={brand.logo}
-                  alt={brand.name}
-                  className="h-7 md:h-9 w-auto object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                  loading="lazy"
-                  width={120}
-                  height={36}
-                />
+                <div className="w-24 h-10 flex items-center justify-center">
+                  <img
+                    src={brand.logo}
+                    alt={brand.name}
+                    className="max-h-8 max-w-[88px] w-auto object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                    loading="lazy"
+                  />
+                </div>
               </div>
             ))}
           </div>

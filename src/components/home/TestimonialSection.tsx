@@ -39,7 +39,9 @@ export function TestimonialSection() {
           </h2>
           {/* Google Maps rating badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 shadow-sm">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_Maps_icon.svg" alt="Google Maps" className="h-4 w-4" />
+            <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="Google Maps">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="#EA4335"/>
+            </svg>
             <div className="flex gap-0.5">
               {[1,2,3,4,5].map(i => <Star key={i} className="h-3.5 w-3.5 text-yellow-400 fill-yellow-400" />)}
             </div>

@@ -115,7 +115,7 @@ export default function Member() {
       setSubmitted(true);
       toast({
         title: "Pendaftaran berhasil!",
-        description: "Selamat bergabung sebagai BESTI Member. 100 poin bonus sudah ditambahkan.",
+        description: "Selamat bergabung sebagai BESTI Member! Mulai kumpulkan poin di setiap transaksi.",
       });
     } catch {
       toast({
@@ -201,9 +201,9 @@ export default function Member() {
             </div>
 
             <div className="p-5 rounded-2xl bg-gradient-to-br from-primary to-accent text-primary-foreground">
-              <p className="text-sm opacity-80 mb-1">Estimasi Poin Awal</p>
-              <p className="font-heading text-3xl font-bold">+100 Poin</p>
-              <p className="text-sm opacity-80 mt-2">Bonus pendaftaran member baru BESTI.</p>
+              <p className="text-sm opacity-80 mb-1">Mulai Kumpulkan Poin</p>
+              <p className="font-heading text-3xl font-bold">50 Poin</p>
+              <p className="text-sm opacity-80 mt-2">Setiap kelipatan Rp 1 juta belanja di toko BESTI.</p>
             </div>
           </aside>
 
@@ -347,7 +347,8 @@ export default function Member() {
                 {loading ? (
                   <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Mendaftarkan...</>
                 ) : (
-                  <><Sparkles className="mr-2 h-4 w-4" />Daftar & Dapatkan 100 Poin</>
+                  <><Sparkles className="mr-2 h-4 w-4" />Daftar Member Sekarang</>
+
                 )}
               </Button>
               <p className="text-xs text-muted-foreground text-center">

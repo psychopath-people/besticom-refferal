@@ -3,10 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Users, Award, Building2, MessageCircle } from "lucide-react";
 
 const stats = [
-  { value: "10+", label: "Tahun Pengalaman" },
-  { value: "500+", label: "Klien Puas" },
+  { value: "2025", label: "Tahun Berdiri" },
+  { value: "10+", label: "Tahun Pengalaman Tim" },
   { value: "1000+", label: "Produk Tersedia" },
-  { value: "50+", label: "Partner Instansi" },
+  { value: "50+", label: "Klien Instansi" },
 ];
 
 const values = [
@@ -47,9 +47,9 @@ export default function About() {
               Tentang BESTI Computer
             </h1>
             <p className="text-lg text-white/75 leading-relaxed">
-              BESTI Computer adalah partner IT terpercaya yang menyediakan solusi lengkap untuk kebutuhan perangkat teknologi informasi.
-              Berdiri sejak 2014, kami berkomitmen memberikan produk berkualitas dan layanan terbaik untuk bisnis,
-              pendidikan, dan kebutuhan personal.
+              BESTI Computer adalah toko IT di Plasa Marina Surabaya yang hadir sejak 2025 —
+              dijalankan oleh tim berpengalaman lebih dari 10 tahun di industri komputer dan teknologi.
+              Kami menghadirkan produk original bergaransi resmi dengan layanan konsultasi profesional untuk kebutuhan personal, bisnis, dan instansi.
             </p>
           </div>
         </div>
@@ -79,18 +79,20 @@ export default function About() {
               </h2>
               <div className="space-y-4 text-gray-600 dark:text-gray-400 leading-relaxed">
                 <p>
-                  BESTI Computer didirikan dengan visi sederhana: membantu setiap orang dan organisasi
-                  mendapatkan perangkat IT yang tepat dengan harga terjangkau dan layanan profesional.
+                  BESTI Computer lahir dari semangat tim yang sudah lebih dari 10 tahun berkecimpung
+                  di industri komputer dan IT. Kami hadir di Plasa Marina Surabaya sejak 2025 dengan
+                  satu visi: memberikan layanan IT terbaik yang selama ini hanya bisa dirasakan dari
+                  toko besar — tapi dengan sentuhan personal.
                 </p>
                 <p>
-                  Berawal dari toko kecil di Plaza Marina Surabaya, kini BESTI telah menjadi partner
-                  pengadaan IT yang dipercaya oleh berbagai instansi pemerintah, perusahaan swasta,
-                  sekolah, dan universitas di seluruh Indonesia.
+                  Meski toko kami baru berdiri, pengalaman tim kami bukan hal baru. Kami sudah menangani
+                  pengadaan IT untuk instansi pemerintah, perusahaan swasta, sekolah, dan kampus —
+                  dan kini membawa semua pengalaman itu ke BESTI Computer.
                 </p>
                 <p>
                   Kami bekerja sama langsung dengan distributor resmi brand-brand ternama seperti
-                  Lenovo, ASUS, HP, Acer, dan Dell untuk memastikan setiap produk yang dijual adalah
-                  original dan bergaransi resmi.
+                  Lenovo, ASUS, HP, Acer, Axioo, dan Dell untuk memastikan setiap produk yang dijual
+                  adalah original dan bergaransi resmi.
                 </p>
               </div>
             </div>
@@ -148,7 +150,7 @@ export default function About() {
               Tim Kami
             </h2>
             <p className="text-gray-500 dark:text-gray-400">
-              Tim profesional dan berpengalaman siap melayani kebutuhan IT Anda
+              Tim kami mungkin baru memulai BESTI, tapi pengalaman di industri IT sudah lebih dari 10 tahun
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
@@ -156,7 +158,7 @@ export default function About() {
               <img src="/foto-tim-4.jpeg" alt="Tim BESTI Computer" className="w-full h-96 object-cover object-top" />
               <div className="p-4 bg-white dark:bg-[#1a1625]">
                 <p className="font-semibold text-gray-900 dark:text-white">Tim Sales & Konsultasi</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Siap membantu 6 hari seminggu</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">Berpengalaman 10+ tahun di industri IT</p>
               </div>
             </div>
             <div className="rounded-2xl overflow-hidden border border-gray-100 dark:border-purple-900/30 shadow-sm">

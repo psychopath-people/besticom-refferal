@@ -44,16 +44,16 @@ export function PoinFloatingWidget() {
 
         <div className="p-4 space-y-3">
           <div className="flex items-center gap-2">
-            <div className="h-9 w-9 rounded-xl bg-yellow-50 dark:bg-purple-900/30 flex items-center justify-center">
-              <Star className="h-5 w-5 text-yellow-500 dark:text-purple-400" />
+            <div className="h-9 w-9 rounded-xl bg-yellow-50 flex items-center justify-center">
+              <Star className="h-5 w-5 text-yellow-500" />
             </div>
             <div>
-              <p className="text-[11px] font-semibold text-gray-400 dark:text-gray-500">Poin Kamu</p>
-              <p className="font-heading font-extrabold text-lg text-gray-900 dark:text-white tabular leading-none">1.250</p>
+              <p className="text-[11px] font-semibold text-gray-400">Program Poin</p>
+              <p className="font-heading font-extrabold text-sm text-gray-900 leading-tight">BESTI Loyalty</p>
             </div>
           </div>
-          <p className="text-[11px] text-gray-500 dark:text-gray-400 leading-tight">
-            Setara <strong className="text-gray-800 dark:text-green-400">Rp 125.000</strong> diskon
+          <p className="text-[11px] text-gray-500 leading-tight">
+            Belanja & kumpulkan poin, tukar dengan hadiah menarik!
           </p>
           <Link
             to="/points"

@@ -2,37 +2,32 @@ const marketplaces = [
   {
     name: "Shopee",
     href: "https://shopee.co.id/besticom",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Shopee.svg/2560px-Shopee.svg.png",
+    logo: "/shopee.png",
   },
   {
     name: "Tokopedia",
     href: "https://www.tokopedia.com/besti-com",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Tokopedialogo.svg/2560px-Tokopedialogo.svg.png",
-  },
-  {
-    name: "Shopee Gratis Ongkir",
-    href: null,
-    logo: "https://cf.shopee.co.id/file/sg-11134258-7rdw8-m2etjrr3ikgd0f",
+    logo: "/tokopedia.png",
   },
   {
     name: "SIPLah",
     href: null,
-    logo: "https://siplah.kemdikbud.go.id/assets/images/logo-siplah.png",
+    logo: "/siplah.png",
   },
   {
-    name: "Bizmarket",
+    name: "Mbizmarket",
     href: null,
-    logo: "https://bizmarket.id/assets/images/logo.png",
+    logo: "/mbizmarket.png",
   },
   {
     name: "INAPROC",
     href: null,
-    logo: "https://inaproc.id/assets/images/logo-inaproc.png",
+    logo: "/inaproc.png",
   },
   {
     name: "PaDi UMK",
     href: null,
-    logo: "https://padi-umkm.com/assets/images/logo-padi.png",
+    logo: "/padi-umkm.png",
   },
 ];
 
@@ -85,7 +80,7 @@ export function MarketplaceSection() {
                 {img}
               </a>
             ) : (
-              <div key={mp.name} className={cardClass}>
+              <div key={mp.name} className={`${cardClass} hover:shadow-md hover:border-gray-300 transition-all group`}>
                 {img}
               </div>
             );
