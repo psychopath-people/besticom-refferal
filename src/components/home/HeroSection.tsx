@@ -31,7 +31,7 @@ const slides = [
       "Setiap transaksi memberikan poin yang bisa ditukar diskon. Cek poin hanya dengan nomor telepon — tanpa aplikasi.",
     primaryCta: { label: "Cek Poin Saya", href: "/points" },
     secondaryCta: { label: "Daftar Member", href: "/member" },
-    image: "/foto-toko-dalam-1.jpeg",
+    image: "/foto-pelanggan-3.jpeg",
     imgPosition: "object-top",
   },
   {
