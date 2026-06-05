@@ -7,6 +7,8 @@ const brands = [
   { name: "MSI", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/MSI_Logo.svg/2560px-MSI_Logo.svg.png" },
   { name: "Intel", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Intel_logo_2023.svg/1200px-Intel_logo_2023.svg.png" },
   { name: "AMD", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/AMD_Logo.svg/1200px-AMD_Logo.svg.png" },
+  { name: "Axioo", logo: "https://axioo.com/wp-content/uploads/2021/03/axioo-logo.png" },
+  { name: "Zyrex", logo: "https://zyrex.com/wp-content/uploads/2020/09/logo-zyrex.png" },
 ];
 
 export function BrandPartners() {

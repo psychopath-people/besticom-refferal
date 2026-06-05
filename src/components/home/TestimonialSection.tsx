@@ -2,25 +2,25 @@ import { Star, Quote } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Rizal & Keluarga",
-    company: "Pelanggan Setia BESTI",
-    photo: "/foto-pelanggan-2.jpeg",
-    rating: 5,
-    text: "Pelayanannya ramah banget, staff-nya sabar jelasin produk. Beli laptop buat anak sekolah, dikasih bonus tas BESTI juga. Puas banget!",
-  },
-  {
-    name: "Andika & Teman",
-    company: "Mahasiswa Surabaya",
+    name: "Sela Seli",
+    company: "Google Maps · 6 bulan lalu",
     photo: "/foto-pelanggan-1.jpeg",
     rating: 5,
-    text: "Harga bersaing, barang original dan bergaransi resmi. Sudah rekomendasiin BESTI ke banyak teman kampus. Wajib kesini!",
+    text: "Pertama kali beli laptop disini, pelayanan sangat memuaskan, harga juga terjangkau.",
   },
   {
-    name: "Budi & Tim",
-    company: "Pengadaan IT Instansi",
+    name: "Stania Rizki",
+    company: "Google Maps · 6 bulan lalu",
+    photo: "/foto-pelanggan-2.jpeg",
+    rating: 5,
+    text: "Toko laptop terbaik yang pernah ada dengan harga yang terjangkau dan pelayanan yang sangat baik, sangat rekomended buat kalian yang lagi bingung mau nyari laptop dimana.",
+  },
+  {
+    name: "Jefri Umbo",
+    company: "Google Maps · 9 bulan lalu",
     photo: "/foto-pelanggan-3.jpeg",
     rating: 5,
-    text: "Pengadaan laptop untuk kantor berjalan lancar. Dokumentasi lengkap, after-sales responsif. BESTI jadi mitra IT terpercaya kami.",
+    text: "Pertama kali beli laptop disini, pelayanan terbaik memuaskan harga juga sangat terjangkau.",
   },
 ];
 
@@ -29,17 +29,23 @@ export function TestimonialSection() {
     <section className="py-12 md:py-16 bg-[#f5f7fa] dark:bg-[#0d0b16]" aria-labelledby="testimonial-heading">
       <div className="container-custom">
 
-        <div className="text-center mb-10 space-y-2">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-100 text-green-700 dark:bg-purple-900/40 dark:text-purple-300 text-xs font-semibold">
-            <Star className="h-3 w-3 fill-green-600 text-green-600 dark:fill-purple-400 dark:text-purple-400" />
+        <div className="text-center mb-10 space-y-3">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold">
+            <Star className="h-3 w-3 fill-green-600 text-green-600" />
             Dipercaya Pelanggan
           </span>
-          <h2 id="testimonial-heading" className="font-heading text-2xl md:text-3xl font-bold text-[#0B1E35] dark:text-white">
+          <h2 id="testimonial-heading" className="font-heading text-2xl md:text-3xl font-bold text-[#0B1E35]">
             Kata Mereka tentang BESTI
           </h2>
-          <p className="text-gray-500 dark:text-gray-400 text-sm max-w-md mx-auto">
-            Instansi, perusahaan, dan sekolah di Surabaya telah mempercayakan kebutuhan IT mereka kepada kami.
-          </p>
+          {/* Google Maps rating badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 shadow-sm">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_Maps_icon.svg" alt="Google Maps" className="h-4 w-4" />
+            <div className="flex gap-0.5">
+              {[1,2,3,4,5].map(i => <Star key={i} className="h-3.5 w-3.5 text-yellow-400 fill-yellow-400" />)}
+            </div>
+            <span className="text-sm font-bold text-gray-800">5.0</span>
+            <span className="text-xs text-gray-400">· 50 ulasan di Google Maps</span>
+          </div>
         </div>
 
         <div className="grid md:grid-cols-3 gap-5">

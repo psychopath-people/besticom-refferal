@@ -192,10 +192,10 @@ export default function About() {
           {/* Event photos grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
-              { src: "/foto-event-1.jpeg", label: "Penandatanganan MoU", pos: "object-center" },
-              { src: "/foto-event-2.jpeg", label: "Serah Terima Pengadaan", pos: "object-top" },
+              { src: "/foto-event-2.jpeg", label: "EduTalk by BESTI", pos: "object-top" },
+              { src: "/foto-event-3.jpeg", label: "Workshop Robotik", pos: "object-center" },
+              { src: "/foto-produk-axioo.jpeg", label: "Pengadaan Axioo AIO PC", pos: "object-center" },
               { src: "/foto-pengiriman.jpeg", label: "Pengiriman Bulk Order", pos: "object-center" },
-              { src: "/foto-produk-asus.jpeg", label: "Stok ASUS ExpertCenter", pos: "object-center" },
             ].map((item, i) => (
               <div key={i} className="rounded-xl overflow-hidden border border-gray-100 shadow-sm">
                 <div className="aspect-[3/4] overflow-hidden">
@@ -206,7 +206,7 @@ export default function About() {
             ))}
           </div>
           <p className="text-center text-xs text-gray-400 mt-4">
-            Dokumentasi kegiatan pengadaan & kerja sama dengan instansi mitra BESTI Computer
+            Dokumentasi kegiatan EduTalk, penandatanganan MoU, dan kerja sama instansi mitra BESTI Computer
           </p>
         </div>
       </section>
@@ -222,7 +222,7 @@ export default function About() {
             Kami siap memberikan penawaran terbaik.
           </p>
           <Button className="bg-green-500 dark:bg-purple-600 hover:bg-green-600 dark:hover:bg-purple-700 text-white font-bold px-8 py-3 h-auto rounded-lg" asChild>
-            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/6285135985189" target="_blank" rel="noopener noreferrer">
               <MessageCircle className="mr-2 h-5 w-5" />
               Hubungi Kami
             </a>

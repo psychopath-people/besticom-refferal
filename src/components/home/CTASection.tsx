@@ -48,7 +48,7 @@ export function CTASection() {
                 className="bg-[#22C55E] hover:bg-green-600 text-white font-bold px-6 py-2.5 h-auto rounded-lg"
                 asChild
               >
-                <a href="https://wa.me/6281234567890?text=Halo%20BESTI,%20saya%20ingin%20konsultasi%20kebutuhan%20IT" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/6285135985189?text=Halo%20BESTI,%20saya%20ingin%20konsultasi%20kebutuhan%20IT" target="_blank" rel="noopener noreferrer">
                   <MessageCircle className="mr-2 h-4 w-4" />
                   Konsultasi via WhatsApp
                 </a>
@@ -58,7 +58,7 @@ export function CTASection() {
                 className="border-white/25 text-white hover:bg-white/10 px-6 py-2.5 h-auto rounded-lg"
                 asChild
               >
-                <a href="tel:+6281234567890">
+                <a href="tel:+6285135985189">
                   <Phone className="mr-2 h-4 w-4" />
                   Telepon Kami
                 </a>

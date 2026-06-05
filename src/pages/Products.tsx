@@ -186,7 +186,7 @@ export default function Products() {
                   </Button>
                   <Button variant="whatsapp" size="sm" className="px-3" asChild>
                     <a
-                      href={`https://wa.me/6281234567890?text=Halo%20BESTI,%20saya%20tertarik%20dengan%20${product.categoryLabel}%20${product.brand}`}
+                      href={`https://wa.me/6285135985189?text=Halo%20BESTI,%20saya%20tertarik%20dengan%20${product.categoryLabel}%20${product.brand}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}

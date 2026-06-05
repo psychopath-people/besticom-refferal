@@ -63,17 +63,17 @@ export function Header() {
       <div className="bg-[#0B1E35] dark:bg-[#0a0a0f] text-white/80 text-xs border-b border-white/5">
         <div className="container-custom flex items-center justify-between py-1.5">
           <div className="flex items-center gap-5">
-            <a href="tel:+6281234567890" className="flex items-center gap-1.5 hover:text-white transition-colors">
-              <Phone className="h-3 w-3 text-green-400 dark:text-purple-400" />
-              <span>+62 812-3456-7890</span>
+            <a href="tel:+6285135985189" className="flex items-center gap-1.5 hover:text-white transition-colors">
+              <Phone className="h-3 w-3 text-green-400" />
+              <span>0851-3598-5189</span>
             </a>
             <span className="hidden sm:flex items-center gap-1.5">
-              <MapPin className="h-3 w-3 text-teal-400 dark:text-purple-300" />
-              Plaza Marina Lt. 3, Surabaya
+              <MapPin className="h-3 w-3 text-teal-400" />
+              Plasa Marina Lt.2 Blok G3-4, Surabaya
             </span>
           </div>
           <span className="hidden md:block text-white/40">
-            Senin–Jumat 09:00–18:00 · Sabtu 09:00–15:00 WIB
+            Buka setiap hari · 10.00 – 21.00 WIB
           </span>
         </div>
       </div>
@@ -89,7 +89,7 @@ export function Header() {
 
             {/* Logo */}
             <Link to="/" className="shrink-0 mr-1" aria-label="BESTI Computer">
-              <img src="/logo-besti.jpg" alt="BESTI Computer" className="h-11 w-auto object-contain" />
+              <img src="/besticom.png" alt="BESTI Computer" className="h-11 w-auto object-contain" />
             </Link>
 
             <div className="hidden md:block h-8 w-px bg-gray-200 dark:bg-purple-900/50 mx-1" />
@@ -183,7 +183,7 @@ export function Header() {
 
               {/* WA CTA */}
               <a
-                href="https://wa.me/6281234567890?text=Halo%20BESTI,%20saya%20ingin%20konsultasi"
+                href="https://wa.me/6285135985189?text=Halo%20BESTI,%20saya%20ingin%20konsultasi"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hidden md:flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-green-500 dark:bg-purple-600 hover:bg-green-600 dark:hover:bg-purple-700 text-white text-xs font-bold transition-all shadow-sm"
@@ -270,7 +270,7 @@ export function Header() {
                 Poin Saya
               </Link>
               <a
-                href="https://wa.me/6281234567890?text=Halo%20BESTI,%20saya%20ingin%20konsultasi"
+                href="https://wa.me/6285135985189?text=Halo%20BESTI,%20saya%20ingin%20konsultasi"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold text-green-700 hover:bg-green-50 transition-all"

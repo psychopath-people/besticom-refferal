@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { MapPin, Phone, Mail, Clock, Instagram, Facebook, Youtube, ExternalLink } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Instagram, ExternalLink } from "lucide-react";
 
 const footerLinks = {
   products: [
@@ -15,7 +15,7 @@ const footerLinks = {
     { name: "Cek Poin Saya", href: "/points" },
     { name: "Scan QR Redeem", href: "/scan" },
   ],
-  brands: ["Lenovo", "ASUS", "HP", "Acer", "Dell", "MSI", "Intel", "AMD"],
+  brands: ["Lenovo", "ASUS", "HP", "Acer", "Dell", "MSI", "Intel", "AMD", "Axioo", "Zyrex"],
 };
 
 export function Footer() {
@@ -32,31 +32,39 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-5">
             <Link to="/" aria-label="BESTI Computer">
-              <img src="/logo-besti.jpg" alt="BESTI Computer" className="h-12 w-auto object-contain brightness-110" />
+              <img src="/besticom.png" alt="BESTI Computer" className="h-12 w-auto object-contain brightness-110" />
             </Link>
             <p className="text-white/55 text-sm leading-relaxed">
               Toko komputer & solusi IT terpercaya di Plaza Marina Surabaya. Produk original bergaransi resmi, melayani instansi & perusahaan.
             </p>
             <div className="flex gap-2">
-              {[
-                { icon: Instagram, label: "Instagram" },
-                { icon: Facebook, label: "Facebook" },
-                { icon: Youtube, label: "YouTube" },
-              ].map(({ icon: Icon, label }) => (
-                <a
-                  key={label}
-                  href="#"
-                  aria-label={`${label} BESTI Computer`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="h-9 w-9 rounded-xl flex items-center justify-center transition-colors"
-                  style={{ background: "rgba(255,255,255,0.07)" }}
-                  onMouseEnter={e => (e.currentTarget.style.background = "#22C55E")}
-                  onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.07)")}
-                >
-                  <Icon className="h-4 w-4 text-white" />
-                </a>
-              ))}
+              <a
+                href="https://www.instagram.com/sahabatbesti/"
+                aria-label="Instagram BESTI Computer"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-9 w-9 rounded-xl flex items-center justify-center transition-colors"
+                style={{ background: "rgba(255,255,255,0.07)" }}
+                onMouseEnter={e => (e.currentTarget.style.background = "#E1306C")}
+                onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.07)")}
+              >
+                <Instagram className="h-4 w-4 text-white" />
+              </a>
+              <a
+                href="https://www.tiktok.com/@sahabatbesti.id/"
+                aria-label="TikTok BESTI Computer"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-9 w-9 rounded-xl flex items-center justify-center transition-colors"
+                style={{ background: "rgba(255,255,255,0.07)" }}
+                onMouseEnter={e => (e.currentTarget.style.background = "#010101")}
+                onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.07)")}
+              >
+                {/* TikTok icon */}
+                <svg viewBox="0 0 24 24" className="h-4 w-4 fill-white" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/>
+                </svg>
+              </a>
             </div>
           </div>
 
@@ -115,32 +123,31 @@ export function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="h-4 w-4 text-green-400 shrink-0 mt-0.5" />
                 <address className="not-italic text-white/50 text-sm leading-relaxed">
-                  Plaza Marina Lt. 3 No. 42<br />
-                  Jl. Margorejo Indah, Surabaya 60238
+                  Plasa Marina Lt.2 Blok G3-4<br />
+                  Jl. Margorejo Indah, Surabaya
                 </address>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-4 w-4 text-green-400 shrink-0" />
-                <a href="tel:+6281234567890" className="text-white/50 hover:text-green-400 transition-colors text-sm">
-                  +62 812-3456-7890
+                <a href="tel:+6285135985189" className="text-white/50 hover:text-green-400 transition-colors text-sm">
+                  0851-3598-5189
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-green-400 shrink-0" />
-                <a href="mailto:info@besticomputer.id" className="text-white/50 hover:text-green-400 transition-colors text-sm">
-                  info@besticomputer.id
+                <a href="mailto:bestimarinasby@gmail.com" className="text-white/50 hover:text-green-400 transition-colors text-sm">
+                  bestimarinasby@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <Clock className="h-4 w-4 text-green-400 shrink-0 mt-0.5" />
                 <p className="text-white/50 text-sm leading-relaxed">
-                  Senin–Jumat: 09:00–18:00 WIB<br />
-                  Sabtu: 09:00–15:00 WIB
+                  Setiap hari: 10:00–21:00 WIB
                 </p>
               </li>
             </ul>
             <a
-              href="https://maps.google.com/?q=Plaza+Marina+Surabaya"
+              href="https://maps.google.com/?q=besticom+surabaya"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4 inline-flex items-center gap-1.5 text-green-400 hover:text-green-300 text-sm font-semibold transition-colors"

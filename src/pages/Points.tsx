@@ -63,68 +63,92 @@ type RewardItem = {
 // Catalog reward — idealnya di-fetch dari backend/n8n sehingga tim bisa update tanpa ubah kode
 const REWARD_CATALOG: RewardItem[] = [
   {
-    id: "diskon_5k",
-    name: "Diskon Rp 5.000",
-    description: "Potongan langsung untuk transaksi berikutnya",
+    id: "mouse_mousepad",
+    name: "Mouse USB / Mousepad",
+    description: "Mouse USB atau mousepad pilihan untuk melengkapi setup Anda",
     points: 50,
-    icon: <Tag className="h-5 w-5" />,
-    category: "diskon",
+    icon: <PackageOpen className="h-5 w-5" />,
+    category: "produk",
   },
   {
-    id: "diskon_10k",
-    name: "Diskon Rp 10.000",
-    description: "Potongan langsung untuk transaksi berikutnya",
+    id: "diskon_50k",
+    name: "Diskon Rp 50.000",
+    description: "Potongan langsung untuk transaksi berikutnya di toko BESTI",
     points: 100,
     icon: <Tag className="h-5 w-5" />,
     category: "diskon",
   },
   {
-    id: "diskon_25k",
-    name: "Diskon Rp 25.000",
-    description: "Potongan langsung untuk transaksi berikutnya",
-    points: 250,
-    icon: <Tag className="h-5 w-5" />,
-    category: "diskon",
-  },
-  {
-    id: "diskon_50k",
-    name: "Diskon Rp 50.000",
-    description: "Potongan langsung untuk transaksi berikutnya",
-    points: 500,
-    icon: <Tag className="h-5 w-5" />,
-    category: "diskon",
-  },
-  {
-    id: "antivirus_1bln",
-    name: "Antivirus 1 Bulan",
-    description: "Aktivasi lisensi antivirus premium selama 30 hari",
+    id: "mouse_wireless_rappo",
+    name: "Mouse Wireless Rappo",
+    description: "Mouse wireless merk Rappo, nyaman dipakai sehari-hari",
     points: 150,
-    icon: <ShieldCheck className="h-5 w-5" />,
-    category: "layanan",
-  },
-  {
-    id: "service_ringan",
-    name: "Gratis Service Ringan",
-    description: "Pembersihan debu, reinstall driver, atau optimasi OS",
-    points: 300,
-    icon: <Wrench className="h-5 w-5" />,
-    category: "layanan",
-  },
-  {
-    id: "mousepad",
-    name: "Mousepad BESTI",
-    description: "Mousepad branded BESTI Computer ukuran standard",
-    points: 200,
     icon: <PackageOpen className="h-5 w-5" />,
     category: "produk",
   },
   {
-    id: "voucher_100k",
-    name: "Voucher Rp 100.000",
-    description: "Voucher belanja produk apa saja di BESTI Computer",
-    points: 1000,
+    id: "voucher_indomart_100k",
+    name: "Voucher Indomaret Rp 100.000",
+    description: "Voucher belanja Indomaret senilai Rp 100.000",
+    points: 300,
     icon: <Ticket className="h-5 w-5" />,
     category: "voucher",
+  },
+  {
+    id: "servis_ringan",
+    name: "Servis Ringan",
+    description: "Pembersihan debu, reinstall driver, atau optimasi performa OS",
+    points: 350,
+    icon: <Wrench className="h-5 w-5" />,
+    category: "layanan",
+  },
+  {
+    id: "tws_wireless_stereo",
+    name: "TWS Wireless Stereo",
+    description: "Earphone TWS wireless stereo untuk musik & panggilan",
+    points: 500,
+    icon: <PackageOpen className="h-5 w-5" />,
+    category: "produk",
+  },
+  {
+    id: "cooling_pad_pro",
+    name: "Cooling Pad Pro Gamer",
+    description: "Cooling pad laptop dengan kipas ekstra untuk gaming & kerja berat",
+    points: 500,
+    icon: <PackageOpen className="h-5 w-5" />,
+    category: "produk",
+  },
+  {
+    id: "printer_mini",
+    name: "Printer Mini Portable",
+    description: "Printer mini portable untuk cetak dokumen & foto di mana saja",
+    points: 600,
+    icon: <PackageOpen className="h-5 w-5" />,
+    category: "produk",
+  },
+  {
+    id: "smartwatch",
+    name: "Smartwatch",
+    description: "Smartwatch multifungsi untuk aktivitas harian & kesehatan",
+    points: 800,
+    icon: <PackageOpen className="h-5 w-5" />,
+    category: "produk",
+  },
+  {
+    id: "printer",
+    name: "Printer",
+    description: "Printer inkjet atau laserjet pilihan untuk kebutuhan kantor & rumah",
+    points: 3000,
+    icon: <PackageOpen className="h-5 w-5" />,
+    category: "produk",
+  },
+  {
+    id: "laptop",
+    name: "Laptop",
+    description: "Laptop pilihan sesuai kebutuhan — gaming, bisnis, atau edukasi",
+    points: 5000,
+    icon: <PackageOpen className="h-5 w-5" />,
+    category: "produk",
   },
 ];
 
@@ -350,10 +374,10 @@ export default function Points() {
 
   const categories: Array<RewardItem["category"] | "semua"> = [
     "semua",
-    "diskon",
-    "layanan",
     "produk",
+    "diskon",
     "voucher",
+    "layanan",
   ];
 
   return (
@@ -484,6 +508,45 @@ export default function Points() {
                 </Button>
               </form>
             </div>
+
+            {/* Info cara kumpul poin — tampil hanya sebelum cek */}
+            {!data && (
+              <div className="rounded-2xl border border-border bg-card p-6 space-y-5">
+                <h3 className="font-heading text-lg text-foreground flex items-center gap-2">
+                  <Sparkles className="h-5 w-5 text-action" />
+                  Cara Kumpulkan Poin
+                </h3>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {[
+                    { emoji: "🛒", title: "Belanja di Toko", desc: "Setiap kelipatan Rp 1 juta belanja = 50 poin otomatis masuk" },
+                    { emoji: "🎁", title: "Tukar Reward", desc: "Tukar poin dengan hadiah mulai dari 50 pt — mouse, diskon, hingga laptop" },
+                    { emoji: "📲", title: "Tanpa Aplikasi", desc: "Cek poin cukup pakai nomor HP yang terdaftar, tanpa perlu download apapun" },
+                    { emoji: "✅", title: "Daftar Member Gratis", desc: "Registrasi gratis di toko atau halaman Daftar Member, langsung dapat poin perdana" },
+                  ].map((item) => (
+                    <div key={item.title} className="flex gap-3 p-4 rounded-xl bg-muted/40 border border-border">
+                      <span className="text-2xl shrink-0">{item.emoji}</span>
+                      <div>
+                        <p className="font-semibold text-sm text-foreground">{item.title}</p>
+                        <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="rounded-xl bg-action/10 border border-action/20 p-4 flex items-center gap-4">
+                  <div className="h-12 w-12 rounded-full bg-action/20 flex items-center justify-center shrink-0">
+                    <Gift className="h-6 w-6 text-action" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-sm text-foreground">Belum jadi member?</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">Daftar sekarang dan mulai kumpulkan poin dari transaksi pertama.</p>
+                  </div>
+                  <a href="/member" className="ml-auto shrink-0 px-4 py-2 rounded-lg bg-action text-action-foreground text-xs font-bold hover:bg-action/90 transition-colors">
+                    Daftar
+                  </a>
+                </div>
+              </div>
+            )}
 
             {/* Hasil & pilihan reward */}
             {data && (
@@ -789,7 +852,7 @@ export default function Points() {
                   },
                   {
                     t: "Lihat poin secara real-time",
-                    d: "Saldo poin Anda diambil langsung dari sistem loyalty BESTI.",
+                    d: "Saldo poin diambil langsung dari sistem BESTI. Setiap kelipatan Rp 1 juta belanja mendapat 50 poin.",
                   },
                   {
                     t: "Pilih hadiah yang diinginkan",
@@ -831,18 +894,6 @@ export default function Points() {
               </div>
             </div>
 
-            <div className="rounded-2xl bg-gradient-to-br from-action/10 to-brand-sky/30 border border-action/20 p-6">
-              <Gift className="h-8 w-8 text-action mb-3" />
-              <h3 className="font-heading text-lg text-foreground mb-2">
-                Belum jadi member?
-              </h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                Daftar gratis & dapatkan poin di setiap transaksi di BESTI Computer.
-              </p>
-              <Button variant="action" asChild>
-                <a href="/member">Daftar Member</a>
-              </Button>
-            </div>
           </aside>
         </div>
       </div>

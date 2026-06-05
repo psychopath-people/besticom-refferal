@@ -9,26 +9,26 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Alamat Toko",
-    details: ["Plaza Marina Lt. 3 No. 42", "Jl. Margorejo Indah", "Surabaya 60238"],
+    details: ["Mall IT Plasa Marina Lt.2 Blok G3-4", "Jl. Margorejo Indah, Sidosermo", "Kec. Wonocolo, Surabaya 60238"],
   },
   {
     icon: Phone,
-    title: "Telepon",
-    details: ["+62 812-3456-7890", "+62 31-8765-4321"],
+    title: "Telepon / WhatsApp",
+    details: ["0851-3598-5189"],
   },
   {
     icon: Mail,
     title: "Email",
-    details: ["info@besticomputer.id", "sales@besticomputer.id"],
+    details: ["bestimarinasby@gmail.com"],
   },
   {
     icon: Clock,
     title: "Jam Operasional",
-    details: ["Senin - Jumat: 09:00 - 18:00", "Sabtu: 09:00 - 15:00", "Minggu: Tutup"],
+    details: ["Senin – Minggu: 10.00 – 21.00 WIB", "Tersedia di Shopee: shopee.co.id/besticom"],
   },
 ];
 
-const WA_NUMBER = "6281234567890";
+const WA_NUMBER = "6285135985189";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", category: "", message: "" });
@@ -101,7 +101,7 @@ export default function Contact() {
                   Untuk respon tercepat, hubungi kami via WhatsApp.
                 </p>
                 <Button variant="whatsapp" className="w-full" asChild>
-                  <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">
+                  <a href="https://wa.me/6285135985189" target="_blank" rel="noopener noreferrer">
                     <MessageCircle className="mr-2 h-4 w-4" />
                     Chat WhatsApp
                   </a>
@@ -232,16 +232,16 @@ export default function Contact() {
             <h2 className="font-heading text-2xl text-gray-900 dark:text-white mb-6">
               Lokasi Toko
             </h2>
-            <div className="aspect-[21/9] rounded-2xl overflow-hidden bg-gray-100 dark:bg-[#1a1625] border border-gray-200 dark:border-purple-900/30">
+            <div className="rounded-2xl overflow-hidden bg-gray-100 border border-gray-200">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.6193855395!2d112.75!3d-7.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMTgnMDAuMCJTIDExMsKwNDUnMDAuMCJF!5e0!3m2!1sen!2sid!4v1600000000000!5m2!1sen!2sid"
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyB2NIWI3Tv9iDPrlnowr_0ZqZWoAQydKJU&q=besticom%20plaza%20marina&maptype=roadmap"
                 width="100%"
-                height="100%"
+                height="650px"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="BESTI Computer Location"
+                title="Lokasi BESTI Computer - Plasa Marina Surabaya"
               />
             </div>
           </div>

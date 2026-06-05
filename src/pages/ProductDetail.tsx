@@ -111,7 +111,7 @@ export default function ProductDetail() {
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button variant="whatsapp" size="lg" className="flex-1" asChild>
                   <a
-                    href={`https://wa.me/6281234567890?text=${encodeURIComponent(waMessage)}`}
+                    href={`https://wa.me/6285135985189?text=${encodeURIComponent(waMessage)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -120,7 +120,7 @@ export default function ProductDetail() {
                   </a>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
-                  <a href="tel:+6281234567890">
+                  <a href="tel:+6285135985189">
                     <Phone className="mr-2 h-5 w-5" />
                     Telepon
                   </a>
@@ -159,7 +159,7 @@ export default function ProductDetail() {
             Tim BESTI siap membantu konsultasi kebutuhan IT Anda. Hubungi kami untuk penawaran terbaik.
           </p>
           <Button variant="accent" size="lg" asChild>
-            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/6285135985189" target="_blank" rel="noopener noreferrer">
               <MessageCircle className="mr-2 h-5 w-5" />
               Chat Sekarang
             </a>

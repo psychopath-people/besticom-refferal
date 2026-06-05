@@ -7,6 +7,7 @@ import { MemberBanner } from "@/components/home/MemberBanner";
 import { WhyChooseUs } from "@/components/home/WhyChooseUs";
 import { TestimonialSection } from "@/components/home/TestimonialSection";
 import { CTASection } from "@/components/home/CTASection";
+import { MarketplaceSection } from "@/components/home/MarketplaceSection";
 import { PoinFloatingWidget } from "@/components/poin/PoinFloatingWidget";
 
 const SITE_URL = "https://besticomputer.id";
@@ -47,6 +48,7 @@ const Index = () => {
         <MemberBanner />
         <WhyChooseUs />
         <TestimonialSection />
+        <MarketplaceSection />
         <CTASection />
       </Layout>
 
