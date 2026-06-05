@@ -168,10 +168,14 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-4">
             <span className="text-white/20 text-xs">Powered by n8n Automation</span>
-            <div className="flex gap-4">
-              <Link to="/about" className="text-white/30 hover:text-white/60 text-xs transition-colors">Kebijakan Privasi</Link>
-              <Link to="/about" className="text-white/30 hover:text-white/60 text-xs transition-colors">Syarat & Ketentuan</Link>
-            </div>
+            <a
+              href="https://msaifulrizal.my.id/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/25 hover:text-green-400 text-xs transition-colors flex items-center gap-1"
+            >
+              Created with ♥ by <span className="font-semibold">msrizal</span>
+            </a>
           </div>
         </div>
       </div>
